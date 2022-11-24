@@ -125,19 +125,18 @@
                                                         {{address.contract_address}}
                                                     </div>
                                                 </div>
-                                                <div style="display:inline-block; float:right; margin-top:-3px">
+                                                <div style="display:flex; float:right; margin-top:-3px">
 
-                                                    <!-- <b-button size="sm" class="ml-1"
-                                                                v-clipboard:copy="address.contract_address"
-                                                                style="margin-right:13px; cursor:pointer; border: none !important;"
-                                                                v-clipboard:success="onCopy" v-clipboard:error="onError"
-                                                                v-ripple.400="'rgba(113, 12, 240, 0.15)'"
-                                                                variant="outline-primary" pill>
-                                                                <i
-                                                                    class="fa-regular fa-copy cursor-pointer darkWhiteText fa-lg m-1"></i>
-                                                                <feather-icon icon="CopyIcon"
+                                                    <b-button size="sm" class="ml-1" @click="doCopy(address.contract_address)"
+                                                        style="margin-right:13px; cursor:pointer; border: none !important;"
+                                                        
+                                                      
+                                                        variant="outline-primary" pill>
+                                                        <i
+                                                            class="fa-regular fa-copy cursor-pointer darkWhiteText fa-lg m-1">Copy</i>
+                                                        <!-- <feather-icon icon="CopyIcon"
                                                                             class="cursor-pointer darkWhiteText" size="20" /> -->
-                                                    <!-- </b-button>  -->
+                                                    </b-button>
                                                     <img src='https://moonsniper.co/images/static/metamask.png'
                                                         class="img-fluid" alt="metamask"
                                                         style="cursor:pointer; width:23px; margin-right:13px;"
@@ -178,18 +177,18 @@
                                                 </div>
 
                                             </div>
-                                            <div style="display:inline-block; float:right;">
+                                            <div style="display:flex; float:right;">
 
 
-                                                <!-- <b-button size="sm" class="ml-1"
-                                                            v-clipboard:copy="address.contract_address"
-                                                            style="margin-right:13px; cursor:pointer; border: none !important;"
-                                                            v-clipboard:success="onCopy" v-clipboard:error="onError"
-                                                            v-ripple.400="'rgba(113, 12, 240, 0.15)'"
-                                                            variant="outline-primary" pill>
-                                                            <i
-                                                                class="fa-regular fa-copy cursor-pointer darkWhiteText fa-xl m-1"></i>
-                                                        </b-button> -->
+                                                <b-button size="sm" class="ml-1"
+                                                @click="doCopy(address.contract_address)"
+                                                    style="margin-right:13px; cursor:pointer; border: none !important;"
+                                                  
+                                                   variant="outline-primary"
+                                                    pill>
+                                                    <i
+                                                        class="fa-regular fa-copy cursor-pointer darkWhiteText fa-xl m-1">Copy</i>
+                                                </b-button>
                                                 <img src='https://moonsniper.co/images/static/metamask.png'
                                                     class="img-fluid" alt="metamask" style="cursor:pointer; width:23px;"
                                                     @click="say('hello')">
@@ -214,7 +213,7 @@
                                                 </div>
                                                 <b-button size="sm" class="ml-1" v-clipboard:copy="selectedContract"
                                                     v-clipboard:success="onCopy" v-clipboard:error="onError"
-                                                    v-ripple.400="'rgba(113, 12, 240, 0.15)'" variant="outline-primary" pill>Copy!
+                                                   variant="outline-primary" pill>Copy!
                                                 </b-button>
     
                                             </div> -->
@@ -1121,6 +1120,9 @@
         BAccordion,
         BOverlay
     } from 'bootstrap-vue-3'
+    import {
+        copyText
+    } from 'vue3-clipboard'
     import vueAwesomeCountdown from 'vue-awesome-countdown'
     export default {
         components: {
@@ -1497,7 +1499,7 @@
                     },
 
                 },
-
+                selectedContract: null,
                 TradeHistoryOptions: {
                     yaxis: {
                         labels: {
@@ -1553,7 +1555,19 @@
             }
         },
         methods: {
+            doCopy(text) {
+                copyText(text, undefined, (error, event) => {
+                    if (error) {
+                        alert('Can not copy')
+                        console.log(error)
+                    } else {
+                        alert('Copied')
+                        console.log(event)
+                    }
+                })
+            },
             loadCoins() {
+                this.selectedContract = null;
                 this.dataloaded = false
                 axios.post(`https://moonsniper.co/api/extention-coin-data-coingecko?coin=${this.coin}`)
                     .then(res => {
@@ -1564,6 +1578,9 @@
                             this.seven_DaysChartseries[0].data = [];
                             this.vestingDataChart.xaxis.categories = [];
                             this.vestingDataSerice = [];
+                            if (typeof this.coindata.contract_address == 'string') {
+                                this.coindata.contract_address = JSON.parse(this.coindata.contract_address);
+                            }
                             this.loadSupplyChart();
                             this.loadVestingChart();
                             this.loadTradeHystory();

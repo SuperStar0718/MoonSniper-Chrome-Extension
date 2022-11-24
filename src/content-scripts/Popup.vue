@@ -74,10 +74,10 @@ export default defineComponent({
 .popup {
   @apply absolute top-4 right-4 bg-white shadow-lg p-4 rounded-md w-72;
   position:relative;
-  height: 90vh;
+  max-height: 90vh;
   overflow-y:auto;
   top:50px;
-  width:800px;
+   width:1000px;
   -moz-border-radius: 5px;
   border-radius: 5px;
   margin-left: auto;
