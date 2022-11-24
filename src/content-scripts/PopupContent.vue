@@ -1744,7 +1744,7 @@
 
             },
             getTimeStamp(data) {
-                alert(data);
+                //alert(data);
                 let d = new Date(data);
                 if (data != null && !isNaN(d)) {
                     return d.getTime();

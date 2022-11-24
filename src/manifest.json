@@ -9,8 +9,15 @@
           "64": "assets/logo64.png",
           "128": "assets/logo128.png"
         },
-        "default_title": "MoonSniper"
-      },
+        "default_title": "MoonSniper",
+        "default_popup": "popup/popup.html"
+    },
+    "host_permissions": [
+        "*://*/*"
+    ],"web_accessible_resources": [{
+    "resources": ["popup/loading.gif"],
+    "matches": ["<all_urls>"]
+    }],
     "icons": {
         "16": "assets/logo16.png",
         "48": "assets/logo64.png",

@@ -1,0 +1,47 @@
+body {
+    background-color: #0A070E;
+    color: #fff;
+    width: 800px;
+    height: 582px;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.special-text {
+    color: red;
+}
+
+#moonsniper-iframe {
+    border: none;
+    overflow: hidden;
+}
+
+#loading-wrapper {
+    margin: 200px auto;
+    font-size: 24px;
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    vertical-align: -.125em;
+    border: .25em solid;
+    border-right: .25em solid transparent;
+    border-radius: 50%;
+    animation: rotate .75s linear infinite;
+}
+
+@keyframes rotate {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(1turn);
+      transform: rotate(1turn);
+    }
+  }
