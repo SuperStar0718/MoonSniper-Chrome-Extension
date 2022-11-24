@@ -1,7 +1,9 @@
+
 import { createApp } from "vue";
 import Popup from "./Popup.vue";
 import "@/styles/main.css";
-
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue-3/dist/bootstrap-vue-3.css'
 const MOUNT_EL_ID = "as-awesome-extension";
 
 let mountEl = document.getElementById(MOUNT_EL_ID);
@@ -56,8 +58,15 @@ if (body) {
 
 
 function triggerPopup(event){
+  
   console.log("popup triggered with symbol: " + event.currentTarget.symbol);
   vm.visible = !vm.visible;
+  if(event.currentTarget.symbol)
+  {
+    vm.coin =event.currentTarget.symbol;
+  }
+
+  
   /* let tdNode = event.target.parentNode.parentNode.parentNode;
   let ReqTd = tdNode.querySelector('.cg-sticky-third-col');
   document.querySelector(".modal").classList.add("show"); */

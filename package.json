@@ -7,7 +7,14 @@
     "serve": "vite preview"
   },
   "dependencies": {
-    "vue": "^3.0.5"
+    "@popperjs/core": "^2.11.6",
+    "apexcharts": "^3.36.3",
+    "axios": "^1.2.0",
+    "bootstrap": "^5.2.3",
+    "bootstrap-vue-3": "^0.4.10",
+    "vue": "^3.0.5",
+    "vue-awesome-countdown": "^1.1.4",
+    "vue3-apexcharts": "^1.4.1"
   },
   "devDependencies": {
     "@asigloo/prettier-config": "^0.2.0",
@@ -17,6 +24,7 @@
     "autoprefixer": "^10.3.1",
     "postcss": "^8.3.6",
     "tailwindcss": "^2.2.7",
+    "unplugin-vue-components": "^0.22.11",
     "vite": "^2.4.4",
     "vite-plugin-chrome-extension": "^0.0.7",
     "vite-plugin-components": "^0.13.2",
