@@ -1,0 +1,36 @@
+{
+    "name": "MoonSniper",
+    "description": "Find investment opportunities with a new, clever, and efficient method of market research",
+    "version": "1.0.0",
+    "manifest_version": 3,
+    "action": {
+        "default_icon": {
+          "16": "assets/logo16.png",
+          "64": "assets/logo64.png",
+          "128": "assets/logo128.png"
+        },
+        "default_title": "MoonSniper"
+      },
+    "icons": {
+        "16": "assets/logo16.png",
+        "48": "assets/logo64.png",
+        "128": "assets/logo128.png"
+    },
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [
+        {
+            "matches": ["<all_urls>"],
+            "js": ["content-scripts/main.js"],
+            "all_frames": true
+        }
+    ],
+    "permissions": [
+        "declarativeNetRequest",
+        "tabs",
+        "activeTab",
+        "scripting"
+    ]
+
+}
