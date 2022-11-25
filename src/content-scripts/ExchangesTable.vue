@@ -8,9 +8,9 @@
                     style=" white-space: nowrap;" responsive   :items="exchangeData.data">
                     <template #cell(exchange)="data">
                         <div>
-                            <a :href="data.item.trade_url" target="blank_" style="color:white !important">
+                            <a :href="data.item.trade_url" target="blank_" class="exchangetdLink">
                             <div class="">
-                                <div style="padding-top:3px; color:black;">{{ data.value }}
+                                <div style="padding-top:3px;">{{ data.value }}
                                 </div>
                             </div>
                         </a>
@@ -145,10 +145,48 @@
 .ExchangeTableDiv .b-overlay {
     /*height: 100px !important;*/
 }
-[dir=ltr] .card .table tbody tr:last-child td:first-child {
-    border-bottom-left-radius: 48rem;
+#moon-app-popup .table{
+    border-spacing: 0px 7px !important;
+    border-collapse: separate;
 }
-[dir=ltr] .card .table tbody tr:last-child td:last-child {
-    border-bottom-right-radius: 71.357rem;
+#moon-app-popup .table tr td:first-child {
+    border-top-left-radius: 50em;
+    border-bottom-left-radius: 50em;
+}
+#moon-app-popup .table tr td:last-child {
+    border-top-right-radius: 50em;
+    border-bottom-right-radius: 50em;
+}
+#moon-app-popup .table tbody tr {
+    box-shadow: inset 1px 2px 1px 0px rgb(82 243 109);
+    border-radius: 50rem !important;
+    background: linear-gradient(172deg, rgba(43, 255, 77, 0.3) 3.11%, rgba(0, 0, 0, 0) 20.06%), rgba(255, 255, 255, 0.07);
+    border: none !important;
+}
+#moon-app-popup .table thead tr th {
+    background: transparent;
+    border: none !important;
+}
+#moon-app-popup .page-link {
+    z-index: 3;
+    color: rgb(136, 131, 131) !important;
+    background: transparent !important;
+    border: none !important;
+}
+#moon-app-popup li.page-item.active .page-link {
+    z-index: 3;
+    color: rgb(255, 255, 255) !important;
+    background: transparent !important;
+    border: none !important;
+}
+.exchangetdLink{
+    color: #000;
+   }
+.tw-dark  .exchangetdLink{
+ color: rgb(255, 255, 255) !important;
+}
+
+.exchangetdLink tr td{
+    padding: 0.72rem 2rem;
 }
 </style>

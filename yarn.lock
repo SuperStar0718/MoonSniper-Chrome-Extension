@@ -2311,7 +2311,7 @@ vue3-clipboard@^1.0.0:
   dependencies:
     clipboard "^2.0.6"
 
-vue@^3.0.5:
+vue@^3.2.45:
   version "3.2.45"
   resolved "https://registry.npmjs.org/vue/-/vue-3.2.45.tgz"
   integrity sha512-9Nx/Mg2b2xWlXykmCwiTUCWHbWIj53bnkizBxKai1g61f2Xit700A1ljowpTIM11e3uipOeiPcSqnmBg6gyiaA==

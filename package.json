@@ -12,7 +12,7 @@
     "axios": "^1.2.0",
     "bootstrap": "^5.2.3",
     "bootstrap-vue-3": "^0.4.10",
-    "vue": "^3.0.5",
+    "vue": "^3.2.45",
     "vue-awesome-countdown": "^1.1.4",
     "vue3-apexcharts": "^1.4.1",
     "vue3-clipboard": "^1.0.0"

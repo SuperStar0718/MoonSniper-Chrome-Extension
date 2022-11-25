@@ -1,10 +1,10 @@
 <template>
-    <div>
-        <b-overlay :show="!dataloaded" rounded="sm">
+    <div id="moon-app-popup" >
+        <b-overlay :show="!dataloaded" rounded="sm"  :class="{'overlay-height':!dataloaded}">
             <div class="details-modal-container" v-if="dataloaded">
                 <div class="w-full justify-content-between d-flex" style="margin-top: 10px; margin-left: 10px;">
                     <div class="d-inline">
-                        <div class="rank_slot darkWhiteText" style="margin-bottom: 8px;font-family: 'Poppins'; opacity: 0.6 !important;
+                        <div class="rank_slot darkWhiteText" style="margin-bottom: 8px;font-family: 'Poppins-Light'; opacity: 0.6 !important;
                                             font-style: normal;
                                             font-weight: 300;
                                             font-size: 12px;
@@ -13,7 +13,7 @@
                             <div class="d-flex m-auto">
                                 <b-avatar class="bg-light mr-1" v-if="coindata.image" :src="coindata.image">
                                 </b-avatar>
-                                <span class="marginx1 m-auto a darkWhiteText" style="font-family: 'Poppins';   font-size: 20px;  font-style: normal;  font-weight: 400;
+                                <span class="marginx1 m-auto a darkWhiteText" style="font-family: 'font-family: 'Poppins-Light';';   font-size: 20px;  font-style: normal;  font-weight: 400;
                                                         width: 105px;
                                                         text-overflow: ellipsis;
                                                         white-space: nowrap;
@@ -23,8 +23,8 @@
 
 
                                 </span>
-                                <span class="marginx1 m-auto b darkWhiteText mr-3"
-                                    :class="{'w-[105px]':coindata.name && coindata.name.length > 8}" style="font-family: 'Poppins';
+                                <span class="marginx1 m-auto  darkWhiteText mr-3"
+                                    :class="{'w-[105px]':coindata.name && coindata.name.length > 8}" style="font-family: 'font-family: 'Poppins-Light';';
                                                         font-size: 20px; 
                                                         font-style: normal;
                                                         font-weight: 400;
@@ -37,7 +37,7 @@
 
                                 </span>
 
-                                <span class="marginx1 m-auto darkWhiteText mx-2" style="font-family: 'Poppins';
+                                <span class="marginx1 m-auto darkWhiteText mx-2" style="'font-family: 'Poppins-Light';
                                                         font-size: 14px; position: relative;
                                                         font-style: normal; opacity: 0.7;
                                                         font-weight: 300; margin-right: 40px !important;">
@@ -229,15 +229,15 @@
                                     ||coindata.market_cap
                                     ||coindata.total_supply_percent" :isVisible="true" title="Market Data"
                         class="open w-100">
-                        <b-card>
-                            <b-card-body style="margin-left: 10px; margin-top: 19px;">
+                        <b-card class="p-0">
+                            <b-card-body class="inner-cbody" style="margin-left: 10px; margin-top: 19px;">
                                 <b-row>
 
                                     <b-col md="10" sm="8" class="text-center sparlineChat mb-1"
                                         style="margin-left: -40px;"
                                         v-if="coindata.sparkline_in_7d&& coindata.sparkline_in_7d.length>0">
                                         <!-- <h5> 7 Days</h5> -->
-                                        <div class="position-absolute w-100" style="z-index:99">
+                                        <div class="position-absolute w-100 d-flex justify-content-between" style="z-index:99">
 
                                             <b-tabs content-class="" class="graph_tab graph_tab-1 float-left w-50"
                                                 style="font-family: Poppins-Light;font-style: normal;font-weight: 400;font-size: 10px;">
@@ -250,7 +250,7 @@
                                             </b-tabs>
                                             <div class="d-inline-flex float-right"
                                                 style="padding-right: 40px !important;">
-                                                <b-tabs content-class="" class="graph_tab my-auto"
+                                                <b-tabs content-class="" class="graph_tab my-auto graph_tab-2"
                                                     style="font-family: Poppins-Light;font-style: normal;font-weight: 400;font-size: 10px;">
                                                     <b-tab active title="1D">
                                                         <div></div>
@@ -331,8 +331,8 @@
                                                     %</span> </div>
                                         </div>
                                         <div class="float-left price_prediction">
-                                            <button class="fs-6 "
-                                                style="border-radius: 10px; font-size: 12px; font-weight: 400; font-family: 'Poppins-Light'; font-style: normal; padding:6px 11px;">Price
+                                            <button class="fs-6 " 
+                                                style="font-size: 12px !important;">Price
                                                 Prediction</button>
                                         </div>
                                     </b-col>
@@ -356,25 +356,25 @@
                                 <div class="d-flex flex-wrap justify-content-start">
                                     <div v-if="coindata.website && coindata.website != '' " cols="1" md="2" lg="2"
                                         sm="2" class="radius_gradient" style="width:110px">
-                                        <div title="" class="mx-auto innerCard text-center str_grey_gradient"
+                                        <b-card title="" class="mx-auto innerCard text-center str_grey_gradient"
                                             style="max-width:200px;">
                                             <a :href="coindata.website" target="_blank" class="d-block"
                                                 style="margin-top:20px; margin-bottom:10px;">
-                                                <b-img rounded :src="'/images/static/website.png'" fluid class="w-50"
+                                                <b-img rounded :src="'https://moonsniper.co/images/static/website.png'" fluid class="w-50 mx-auto"
                                                     alt="Responsive image" />
                                             </a>
                                             <div class="soicalLable soicalLable-2">
                                                 Website
                                             </div>
-                                        </div>
+                                        </b-card>
                                     </div>
                                     <div class="radius_gradient" style="width:110px"
                                         v-if="coindata.twitter && coindata.twitter != '' ">
-                                        <div title="" class="mx-auto innerCard text-center str_grey_gradient"
+                                        <b-card title="" class="mx-auto innerCard text-center str_grey_gradient"
                                             style="max-width:200px;">
                                             <a :href="coindata.twitter" target="_blank" class="d-block"
                                                 style="margin-top:20px; margin-bottom:10px;">
-                                                <b-img rounded :src="'/images/static/twitter.png'" fluid class="w-50"
+                                                <b-img rounded :src="'https://moonsniper.co/images/static/twitter.png'" fluid class="w-50 mx-auto"
                                                     alt="Responsive image" />
                                             </a>
                                             <div class="soicalLable soicalLable-2" v-if="coindata.twitter_followers">
@@ -383,16 +383,16 @@
                                             <div class="soicalLable soicalLable-2" v-else>
                                                 Twitter
                                             </div>
-                                        </div>
+                                        </b-card>
                                     </div>
 
                                     <div class="radius_gradient" style="width:110px"
                                         v-if="coindata.telegram && coindata.telegram != '' ">
-                                        <div title="" class="mx-auto innerCard text-center str_grey_gradient"
+                                        <b-card title="" class="mx-auto innerCard text-center str_grey_gradient"
                                             style="max-width:200px;">
                                             <a :href="coindata.telegram" target="_blank" class="d-block"
                                                 style="margin-top:20px; margin-bottom:10px;">
-                                                <b-img rounded :src="'/images/static/telegram.png'" fluid class="w-50"
+                                                <b-img rounded :src="'https://moonsniper.co/images/static/telegram.png'" fluid class="w-50 mx-auto"
                                                     alt="Responsive image" />
 
                                             </a>
@@ -402,15 +402,15 @@
                                             <div class="soicalLable soicalLable-2" v-else>
                                                 Telegram
                                             </div>
-                                        </div>
+                                        </b-card>
                                     </div>
                                     <div class="radius_gradient" style="width:110px"
                                         v-if="coindata.discord && coindata.discord != '' ">
-                                        <div title="" class="mx-auto innerCard text-center str_grey_gradient"
+                                        <b-card title="" class="mx-auto innerCard text-center str_grey_gradient"
                                             style="max-width:200px;">
                                             <a :href="coindata.discord" target="_blank" class="d-block"
                                                 style="margin-top:20px; margin-bottom:10px;">
-                                                <b-img rounded :src="'/images/static/discord.png'" fluid class="w-50"
+                                                <b-img rounded :src="'https://moonsniper.co/images/static/discord.png'" fluid class="w-50 mx-auto"
                                                     alt="Responsive image" />
                                             </a>
                                             <div class="soicalLable soicalLable-2" v-if="coindata.medium_followers">
@@ -418,15 +418,15 @@
                                             </div>
                                             <div class="soicalLable soicalLable-2" v-else>Discord
                                             </div>
-                                        </div>
+                                        </b-card>
                                     </div>
                                     <div class="radius_gradient" style="width:110px"
                                         v-if="coindata.medium && coindata.medium != '' ">
-                                        <div title="" class="mx-auto innerCard text-center str_grey_gradient"
+                                        <b-card title="" class="mx-auto innerCard text-center str_grey_gradient"
                                             style="max-width:200px;">
                                             <a :href="coindata.medium" target="_blank" class="d-block"
                                                 style="margin-top:20px; margin-bottom:10px;">
-                                                <b-img rounded :src="'/images/static/medium.png'" fluid class="w-50"
+                                                <b-img rounded :src="'https://moonsniper.co/images/static/medium.png'" fluid class="w-50 mx-auto"
                                                     alt="Responsive image" />
 
                                             </a>
@@ -435,15 +435,15 @@
                                             </div>
                                             <div class="soicalLable soicalLable-2" v-else>Medium
                                             </div>
-                                        </div>
+                                        </b-card>
                                     </div>
                                     <div class="radius_gradient" style="width:110px"
                                         v-if="coindata.reddit && coindata.reddit != '' ">
-                                        <div title="" class="mx-auto innerCard text-center str_grey_gradient"
+                                        <b-card title="" class="mx-auto innerCard text-center str_grey_gradient"
                                             style="max-width:200px;">
                                             <a :href="coindata.reddit" target="_blank" class="d-block"
                                                 style="margin-top:20px; margin-bottom:10px;">
-                                                <b-img rounded :src="'/images/static/reddit.png'" fluid class="w-50"
+                                                <b-img rounded :src="'https://moonsniper.co/images/static/reddit.png'" fluid class="w-50 mx-auto"
                                                     alt="Responsive image" />
 
                                             </a>
@@ -452,17 +452,17 @@
                                             </div>
                                             <div class="soicalLable soicalLable-2" v-else>Reddit
                                             </div>
-                                        </div>
+                                        </b-card>
                                     </div>
                                     <div class="radius_gradient" style="width:110px"
                                         v-if="coindata.whitepaper && coindata.whitepaper != '' ">
-                                        <div title=""
+                                        <b-card title=""
                                             class="mx-auto innerCard text-center str_grey_gradient whitepaper-card"
                                             style="max-width:200px; ">
                                             <a :href="coindata.whitepaper" target="_blank" class="d-block"
                                                 style="margin-top:20px; margin-bottom:10px;">
-                                                <b-img rounded :src="'/images/static/whitepaper.png'" fluid
-                                                    class="w-50 bg-light" alt="Responsive image" />
+                                                <b-img rounded :src="'https://moonsniper.co/images/static/whitepaper.png'" fluid
+                                                    class="w-50 mx-auto bg-light" alt="Responsive image" />
 
                                             </a>
                                             <div class="soicalLable soicalLable-2" v-if="coindata.whitepaper_followers">
@@ -470,15 +470,15 @@
                                             </div>
                                             <div class="soicalLable soicalLable-2" v-else>Whitepaper
                                             </div>
-                                        </div>
+                                        </b-card>
                                     </div>
                                     <div class="radius_gradient " style="width:110px"
                                         v-if="coindata.github && coindata.github != '' ">
-                                        <div title="" class="mx-auto innerCard text-center str_grey_gradient"
+                                        <b-card title="" class="mx-auto innerCard text-center str_grey_gradient"
                                             style="max-width:200px;">
                                             <a :href="coindata.github" target="_blank" class="d-block"
                                                 style="margin-top:20px; margin-bottom:10px;">
-                                                <b-img rounded :src="'/images/static/github.png'" fluid class="w-50"
+                                                <b-img rounded :src="'https://moonsniper.co/images/static/github.png'" fluid class="w-50 mx-auto"
                                                     alt="Responsive image" />
                                             </a>
                                             <div class="soicalLable soicalLable-2" v-if="coindata.github_followers">
@@ -486,7 +486,7 @@
                                             </div>
                                             <div class="soicalLable soicalLable-2" v-else>Github
                                             </div>
-                                        </div>
+                                        </b-card>
                                     </div>
                                 </div>
                                 <div class="text-center mt-1 mb-1 justify-content-start d-flex flex-wrap socialData">
@@ -494,7 +494,7 @@
 
                                     <div class="radius_gradient cursor-pointer" style="width:110px;"
                                         v-if="coindata.average_sentiment">
-                                        <div title="" class="mx-auto  innerCard text-center str_grey_gradient"
+                                        <b-card title="" class="mx-auto  innerCard text-center str_grey_gradient"
                                             style="max-width:120px;">
 
                                             <div class="justify-content-center text-nowrap socialText2 "
@@ -504,11 +504,11 @@
                                             <div class="soicalLable sl2 darkWhiteText lableText">Social Score
                                             </div>
 
-                                        </div>
+                                        </b-card>
                                     </div>
                                     <div class="radius_gradient cursor-pointer" style="width:110px;"
                                         v-if="coindata.social_mentions_change">
-                                        <div title="" class="mx-auto innerCard text-center str_grey_gradient"
+                                        <b-card title="" class="mx-auto innerCard text-center str_grey_gradient"
                                             style="max-width:200px;">
                                             <div class="justify-content-center text-nowrap socialText2 text-success-green "
                                                 style="margin-top: 10px; margin-bottom: 12px;"
@@ -522,12 +522,12 @@
                                             <div class="soicalLable sl2 darkWhiteText lableText">Social Mentions
                                             </div>
 
-                                        </div>
+                                        </b-card>
                                     </div>
 
                                     <div class="radius_gradient cursor-pointer" style="width:110px;"
                                         v-if="coindata.average_sentiment">
-                                        <div title="" class="mx-auto innerCard text-center str_grey_gradient"
+                                        <b-card title="" class="mx-auto innerCard text-center str_grey_gradient"
                                             style="max-width:200px;">
                                             <div class="justify-content-center text-nowrap socialText2 "
                                                 style="margin-top: 10px; margin-bottom: 12px;"
@@ -542,7 +542,7 @@
                                                 Sentiment
                                             </div>
 
-                                        </div>
+                                        </b-card>
                                     </div>
 
                                     <div class="radius_gradient cursor-pointer" style="width:110px;"
@@ -568,7 +568,7 @@
                                         </div>
                                     </div>
                                     <div class="radius_gradient cursor-pointer" style="width:110px;">
-                                        <div title="" class="mx-auto innerCard text-center str_grey_gradient"
+                                        <b-card title="" class="mx-auto innerCard text-center str_grey_gradient"
                                             style="max-width:200px;">
                                             <div class="justify-content-center text-nowrap socialText2 "
                                                 style="margin-top: 10px; margin-bottom: 12px;"
@@ -581,7 +581,7 @@
                                                 Sentiment
                                             </div>
 
-                                        </div>
+                                        </b-card>
                                     </div>
 
                                     <div class="radius_gradient cursor-pointer" style="width:110px;"
@@ -651,7 +651,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <vueAwesomeCountdown :end-time="getTimeStamp(coindata.next_unlock_date)">
+                                <vueAwesomeCountdown :end-time="new Date().getTime() + 60000">
                                     <template v-slot:process="{ timeObj }">
                                         <div class="d-flex">
                                             <div class="d-iline text-center" style="margin-left: 12px;">
@@ -1083,6 +1083,7 @@
     </div>
 </template>
 <script>
+
     import axios from 'axios'
     import VueApexCharts from "vue3-apexcharts";
     import ExchangesTable from './ExchangesTable.vue'
@@ -1566,6 +1567,9 @@
                     }
                 })
             },
+            say(message) {
+                alert("Please connect your metamask")
+            },
             loadCoins() {
                 this.selectedContract = null;
                 this.dataloaded = false
@@ -1596,7 +1600,7 @@
                                 }
                             }
                             this.seven_DaysChartseries[0].data = sparklines;
-                            this.dataloaded = true
+                            this.dataloaded = true;            
                         }
 
                     })
@@ -2080,4 +2084,222 @@
     }
 </script>
 <style>
+#moon-app-popup .b-overlay-wrap.position-relative
+{
+   
+}
+#moon-app-popup{
+    max-height: 90vh;
+    overflow-y:auto;
+    overflow-x:hidden;
+}
+ #moon-app-popup::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+    cursor: pointer;
+}
+#moon-app-popup::-webkit-scrollbar-corner {
+    background: rgba(0, 0, 0, 0);
+    z-index: 999;
+}
+
+#moon-app-popup::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.3);
+    background-color: #ffffff;
+
+}
+
+
+.tw-dark #moon-app-popup .accordion-body{
+    background: #232228 !important;
+    border-color: #3b4253;
+  }
+  .accordion-body{
+  }
+.MoonApp-div .accordion-item{
+
+    font-family: 'Poppins-Light';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 15px;
+      border-left: none;
+    border-right: none;
+    border-top: none;
+  }
+  .tw-dark .MoonApp-div .accordion-item{
+
+      color:fff !important; 
+      background: #232228 !important;
+      border-color: #3b4253;
+  }
+  .tw-dark .MoonApp-div accordion-button:not(.collapsed) {
+    color: #fff;
+    background: #232228 !important;
+    border-color: #3b4253;
+    box-shadow: inset 0 calc(-1 * var(--bs-accordion-border-width)) 0 var(--bs-accordion-border-color);
+  }
+  .tw-dark .MoonApp-div
+  {
+    color:#fff !important; 
+  }
+  .tw-dark .chart-desc  {
+    color: white !important;
+    font-size: 14px;
+}
+.tw-dark  .chart-desc a {
+    color: white !important;
+}
+.apexcharts-tooltip {
+    background: #f3f3f3;
+    color: #78909C;
+}
+.poppins-font {
+    font-family: 'Poppins-Light';
+}
+  /* Accordion CSS */
+  button.accordion-button {
+    font-family: 'Poppins-Light'; 
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    }
+  .tw-dark  button.accordion-button {
+    background: #232228 !important;
+    border-color: #3b4253;
+    color: white;
+    opacity:0.7;
+    }
+   .collapse-title {
+        font-weight: 400;
+        font-size: 16px;
+        opacity: 0.7;
+    }
+    .tw-dark .accordion-body {
+        background: #232228 !important;
+        border-color: #3b4253;
+        color:#fff;
+    }
+    .accordion-button:focus {
+        z-index: 3;
+        box-shadow: none !important;
+        border-color:none !important;
+        outline: 0px;
+      }
+    /*card css*/
+    .inner-cbody {
+        padding-left:0px !important;
+        padding-right:0px !important;
+        padding-top: 8px;
+    }
+    .tw-dark .card-body {
+        background: #232228 !important;
+        border-color: #3b4253;
+        color:#fff;
+    }
+    #moon-app-popup .card {
+        border:none;
+    }
+
+     .card-body  .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+        background: transparent !important;
+    border: none !important;
+    }
+    .tw-dark .card-body  .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: #fff !important;
+    }
+    .graph_tab-2 ul, .graph_tab-2 ul{
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        border:none;
+    }
+    .graph_tab-1 ul.nav.nav-tabs
+    {
+        border: none;
+        margin-left: 87px;
+    }
+    
+    .tw-dark .nav-link{
+        color:#fff;
+    }
+    .graph_tab-2 ul.nav.nav-tabs button,  .graph_tab ul.nav.nav-tabs button{
+        padding:0 !important;
+        margin-right: 1rem;
+    }
+    .fs-6{
+        border-radius: 10px;
+    font-size: 12px !important;
+    font-weight: 400;
+    font-family: 'Poppins-Light';
+    background: white;
+    font-style: normal;
+    padding: 6px 11px;
+    color: #322a2a;
+    }
+    .radius_gradient {
+        background: linear-gradient(146.03deg, lime 7%, rgba(255, 255, 255, 0) 50%) !important;
+    }
+    .radius_gradient {
+        margin: 10px;
+        padding: 1px;
+        border-radius: 30px;
+    }
+   .radius_gradient {
+        max-width: 240px;
+        /* margin: auto; */
+    }
+   .str_grey_gradient.card {
+        margin-bottom: 0;
+        border-radius: 30px;
+    }
+    .str_grey_gradient .card-body {
+        border-radius: 30px;
+        padding: 1rem;
+        padding-top: 0.42rem;
+        background: linear-gradient(146.03deg, #2bff4d -241%, #2c2b31 55.77%), white !important;
+    }
+    .soicalLable-2 {
+        font-size: 15px !important;
+        height: 30px;
+    }
+    .soicalLable.darkWhiteText.lableText {
+        height: 32px;
+    }
+    .soicalLable {
+        font-family: 'Poppins-Light';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 12px !important;
+        opacity: 0.8;
+    }
+    .socialText2 {
+        height: 33px;
+    }
+    .socialText2 {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        font-family: 'Poppins-Light';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 20px;
+    }
+    button.accordion-button.collapsed::after {
+       /* background-image: var(--bs-accordion-btn-active-icon); */
+    }
+    .accordion-button::after {
+        --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='white'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+        --bs-accordion-btn-active-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='white'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+        background-size: 14px !important;
+    }
+    .overlay-height{
+        height:80vh
+      }
+    @font-face {
+        font-family: "Poppins-Light" !important;
+        src: local("Poppins-Light"),
+         url(../fonts/Poppins-Light.ttf) format("truetype");
+      }
 </style>

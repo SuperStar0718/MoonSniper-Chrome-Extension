@@ -47,7 +47,7 @@ export default defineComponent({
 });
 </script>
 <template>
-  <div class="overlay dark-layout" v-show="visible" >
+  <div class="overlay MoonApp-div" v-show="visible" >
     <div class="popup">
       <div class="cancel-button cursor-pointer  bg-gray-400  rounded-sm" @click="closePopup">X</div>
       <!-- <pre>{{ currentTab }}</pre> -->
@@ -63,30 +63,35 @@ export default defineComponent({
 
 .cancel-button{
    position: absolute;
-    right: 3px;
-    top: 2px;
     font-size: 15px;
     font-weight: bold;
     padding: 2px 8px;
- 
+    right: 12px;
+    z-index: 999999999;
+    top: 7px;
 }
 
 .popup {
   @apply absolute top-4 right-4 bg-white shadow-lg p-4 rounded-md w-72;
   position:relative;
-  max-height: 90vh;
-  overflow-y:auto;
+  overflow-x:hidden;
   top:50px;
-   width:1000px;
+   width:900px;
   -moz-border-radius: 5px;
-  border-radius: 5px;
+  border-radius: 30px;
   margin-left: auto;
   margin-right: auto;
+  padding: 0.8rem 1.4rem !important;
 }
-.accordion-button:focus {
-  z-index: 3;
-  box-shadow: none !important;
-  border-color:none !important;
-  outline: 0px;
+
+.tw-dark .MoonApp-div .popup{
+  background: #232228 !important;
+  border-color: #3b4253;
+}
+
+@font-face {
+  font-family: "Poppins-Light";
+  src: local("Poppins-Light"),
+   url(../fonts/Poppins-Light.ttf) format("truetype");
 }
 </style>
