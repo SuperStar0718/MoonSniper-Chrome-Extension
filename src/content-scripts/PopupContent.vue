@@ -2500,7 +2500,7 @@
 
     li.cunningDrop.dropdown-mine.darkBackgroundBlack {
         z-index: 999;
-        height: 270px;
+        max-height: 270px;
         overflow: auto;
     }
 

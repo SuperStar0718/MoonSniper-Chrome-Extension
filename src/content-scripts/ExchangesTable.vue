@@ -166,6 +166,7 @@
 #moon-app-popup .table thead tr th {
     background: transparent;
     border: none !important;
+    color:#fff;
 }
 #moon-app-popup .page-link {
     z-index: 3;
