@@ -47,13 +47,16 @@ export default defineComponent({
 });
 </script>
 <template>
-  <div class="overlay MoonApp-div" v-show="visible" >
+  <div class="tw-dark">
+    <div class="overlay MoonApp-div" v-show="visible" >
     <div class="popup">
       <div class="cancel-button cursor-pointer  bg-gray-400  rounded-sm" @click="closePopup">X</div>
       <!-- <pre>{{ currentTab }}</pre> -->
      <PopupContent :coin="coin" :active="visible"/>
     </div>
   </div>
+</div>
+
 </template>
 
 <style>

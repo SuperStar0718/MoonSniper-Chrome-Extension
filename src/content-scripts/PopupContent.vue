@@ -1,6 +1,6 @@
 <template>
-    <div id="moon-app-popup" >
-        <b-overlay :show="!dataloaded" rounded="sm"  :class="{'overlay-height':!dataloaded}">
+    <div id="moon-app-popup">
+        <b-overlay :show="!dataloaded" rounded="sm" :class="{'overlay-height':!dataloaded}">
             <div class="details-modal-container" v-if="dataloaded">
                 <div class="w-full justify-content-between d-flex" style="margin-top: 10px; margin-left: 10px;">
                     <div class="d-inline">
@@ -8,7 +8,10 @@
                                             font-style: normal;
                                             font-weight: 300;
                                             font-size: 12px;
-                                            ">Rank #{{toInterNationalNumber(coindata.market_cap_rank)}}</div>
+                                            ">Rank #{{toInterNationalNumber(coindata.market_cap_rank)}}
+
+
+                        </div>
                         <div class="d-flex" style="margin-top:11px;">
                             <div class="d-flex m-auto">
                                 <b-avatar class="bg-light mr-1" v-if="coindata.image" :src="coindata.image">
@@ -20,7 +23,6 @@
                                                         overflow: hidden;" data-toggle="tooltip" data-placement="top"
                                     :title="coindata.name" v-if="coindata.name && coindata.name.length > 8 ">
                                     {{coindata.name}}
-
 
                                 </span>
                                 <span class="marginx1 m-auto  darkWhiteText mr-3"
@@ -65,6 +67,10 @@
                                                         font-weight: 300;
                                                         font-size: 12px; margin-top: 2px;border-radius:5px; padding:0px 5px">
                                         <div style="display: inline; margin:auto;">
+                                            <i class="cursor-pointer darkWhiteText"
+                                                style="margin-right:13px; margin-bottom: 6px;">
+                                                <font-awesome-icon icon="fa-solid fa-chevron-up" />
+                                            </i>
                                             <!-- <feather-icon size="20" icon="ChevronUpIcon" /> -->
                                         </div>
                                         <span>{{ roundData(coindata.price_change_percentage_24h) }}%</span>
@@ -74,6 +80,10 @@
                                         style="font-size:12px; font-weight: 300; margin-top: 2px;border-radius:5px; padding:0px 5px"
                                         class="btn-danger d-flex marginx1">
                                         <div style="display: inline; margin:auto;">
+                                            <i class="cursor-pointer darkWhiteText"
+                                                style="margin-right:13px; margin-bottom: 6px;">
+                                                <font-awesome-icon icon="fa-solid fa-chevron-up" />
+                                            </i>
                                             <!-- <feather-icon size="20" icon="ChevronDownIcon" /> -->
                                         </div>
                                         <span>{{ roundData(coindata.price_change_percentage_24h) }}%</span>
@@ -95,8 +105,9 @@
                                                 ">Contract </div>
 
 
-                                <b-dropdown size="lg" variant="flat-secondary" style="padding:0px !important;"
-                                    id="dropdown-left1" no-caret class="cunningDrop">
+                                <b-dropdown size="lg" variant="flat-secondary"
+                                    style="padding:0px !important; border-radius: 20px;" id="dropdown-left1" no-caret
+                                    class="cunningDrop Contract-div">
                                     <template #button-content>
                                         <div class="darkBackgroundBlack"
                                             v-for="(address,index) in coindata.contract_address.slice(0, 1)"
@@ -104,7 +115,9 @@
                                             <div class="flex">
 
                                                 <b-img v-if="coindata.image" :src="coindata.image" fluid
-                                                    alt="Responsive image" style="margin-right:5px; height:30px;     position: relative;
+                                                    alt="Responsive image" style="margin-right:5px;
+                                                     height:36px;   
+                                                      position: relative;
                                                                     bottom: 4px;" />
                                                 <div style="font-family: 'Poppins-Light'; display:inline-block;
                                                                     font-style: normal;    position: relative;
@@ -127,23 +140,26 @@
                                                 </div>
                                                 <div style="display:flex; float:right; margin-top:-3px">
 
-                                                    <b-button size="sm" class="ml-1" @click="doCopy(address.contract_address)"
-                                                        style="margin-right:13px; cursor:pointer; border: none !important;"
-                                                        
-                                                      
+                                                    <b-button size="sm" class="ml-1 CopyButton"
+                                                        @click="doCopy(address.contract_address)"
                                                         variant="outline-primary" pill>
-                                                        <i
-                                                            class="fa-regular fa-copy cursor-pointer darkWhiteText fa-lg m-1">Copy</i>
+                                                        <i class="cursor-pointer darkWhiteText fa-lg m-1 "
+                                                            style="color:#fff; margin: 1rem !important;">
+                                                            <font-awesome-icon icon="fa-regular fa-copy" />
+                                                        </i>
                                                         <!-- <feather-icon icon="CopyIcon"
                                                                             class="cursor-pointer darkWhiteText" size="20" /> -->
                                                     </b-button>
                                                     <img src='https://moonsniper.co/images/static/metamask.png'
-                                                        class="img-fluid" alt="metamask"
-                                                        style="cursor:pointer; width:23px; margin-right:13px;"
-                                                        @click="say('say')">
-                                                    <!-- <feather-icon icon="ChevronDownIcon"
-                                                                class="cursor-pointer darkWhiteText" size="20"
-                                                                style="margin-right:13px; margin-bottom: 6px;" /> -->
+                                                        class="img-fluid" alt="metamask" style="cursor:pointer; width:23px; margin-right:13px;
+                                                        height: fit-content;
+                                                        margin-top: auto;
+                                                        margin-bottom: auto;" @click="say('say')">
+
+                                                    <i class="cursor-pointer "
+                                                        style="margin-right:13px; margin-bottom: 6px; color:white">
+                                                        <font-awesome-icon icon="fa-solid fa-chevron-down" />
+                                                    </i>
 
                                                 </div>
 
@@ -159,7 +175,7 @@
                                             v-for="(address,index) in coindata.contract_address" :key="index"
                                             style="display:flex; padding: 4px;">
                                             <b-img v-if="coindata.image" :src="coindata.image" fluid
-                                                alt="Responsive image" style="margin-right:5px; height:30px;" />
+                                                alt="Responsive image" style="margin-right:5px; height:36px;" />
                                             <div class="" style="font-family: 'Poppins-Light'; display:inline-block; font-style: normal;
                                                                         font-weight: 500;
                                                                         font-size: 14px;
@@ -180,14 +196,14 @@
                                             <div style="display:flex; float:right;">
 
 
-                                                <b-button size="sm" class="ml-1"
-                                                @click="doCopy(address.contract_address)"
+                                                <b-button size="sm" class="ml-1 CopyButton"
+                                                    @click="doCopy(address.contract_address)"
                                                     style="margin-right:13px; cursor:pointer; border: none !important;"
-                                                  
-                                                   variant="outline-primary"
-                                                    pill>
-                                                    <i
-                                                        class="fa-regular fa-copy cursor-pointer darkWhiteText fa-xl m-1">Copy</i>
+                                                    variant="outline-primary" pill>
+                                                    <i class="cursor-pointer  fa-lg m-1 "
+                                                        style="margin: 1rem !important; color:#fff;">
+                                                        <font-awesome-icon icon="fa-regular fa-copy" />
+                                                    </i>
                                                 </b-button>
                                                 <img src='https://moonsniper.co/images/static/metamask.png'
                                                     class="img-fluid" alt="metamask" style="cursor:pointer; width:23px;"
@@ -237,7 +253,8 @@
                                         style="margin-left: -40px;"
                                         v-if="coindata.sparkline_in_7d&& coindata.sparkline_in_7d.length>0">
                                         <!-- <h5> 7 Days</h5> -->
-                                        <div class="position-absolute w-100 d-flex justify-content-between" style="z-index:99">
+                                        <div class="position-absolute w-100 d-flex justify-content-between"
+                                            style="z-index:99">
 
                                             <b-tabs content-class="" class="graph_tab graph_tab-1 float-left w-50"
                                                 style="font-family: Poppins-Light;font-style: normal;font-weight: 400;font-size: 10px;">
@@ -331,8 +348,7 @@
                                                     %</span> </div>
                                         </div>
                                         <div class="float-left price_prediction">
-                                            <button class="fs-6 " 
-                                                style="font-size: 12px !important;">Price
+                                            <button class="fs-6 " style="font-size: 12px !important;">Price
                                                 Prediction</button>
                                         </div>
                                     </b-col>
@@ -360,8 +376,8 @@
                                             style="max-width:200px;">
                                             <a :href="coindata.website" target="_blank" class="d-block"
                                                 style="margin-top:20px; margin-bottom:10px;">
-                                                <b-img rounded :src="'https://moonsniper.co/images/static/website.png'" fluid class="w-50 mx-auto"
-                                                    alt="Responsive image" />
+                                                <b-img rounded :src="'https://moonsniper.co/images/static/website.png'"
+                                                    fluid class="w-50 mx-auto" alt="Responsive image" />
                                             </a>
                                             <div class="soicalLable soicalLable-2">
                                                 Website
@@ -374,8 +390,8 @@
                                             style="max-width:200px;">
                                             <a :href="coindata.twitter" target="_blank" class="d-block"
                                                 style="margin-top:20px; margin-bottom:10px;">
-                                                <b-img rounded :src="'https://moonsniper.co/images/static/twitter.png'" fluid class="w-50 mx-auto"
-                                                    alt="Responsive image" />
+                                                <b-img rounded :src="'https://moonsniper.co/images/static/twitter.png'"
+                                                    fluid class="w-50 mx-auto" alt="Responsive image" />
                                             </a>
                                             <div class="soicalLable soicalLable-2" v-if="coindata.twitter_followers">
                                                 {{kFormatter(coindata.twitter_followers)}}
@@ -392,8 +408,8 @@
                                             style="max-width:200px;">
                                             <a :href="coindata.telegram" target="_blank" class="d-block"
                                                 style="margin-top:20px; margin-bottom:10px;">
-                                                <b-img rounded :src="'https://moonsniper.co/images/static/telegram.png'" fluid class="w-50 mx-auto"
-                                                    alt="Responsive image" />
+                                                <b-img rounded :src="'https://moonsniper.co/images/static/telegram.png'"
+                                                    fluid class="w-50 mx-auto" alt="Responsive image" />
 
                                             </a>
                                             <div class="soicalLable soicalLable-2" v-if="coindata.telegram_members">
@@ -410,8 +426,8 @@
                                             style="max-width:200px;">
                                             <a :href="coindata.discord" target="_blank" class="d-block"
                                                 style="margin-top:20px; margin-bottom:10px;">
-                                                <b-img rounded :src="'https://moonsniper.co/images/static/discord.png'" fluid class="w-50 mx-auto"
-                                                    alt="Responsive image" />
+                                                <b-img rounded :src="'https://moonsniper.co/images/static/discord.png'"
+                                                    fluid class="w-50 mx-auto" alt="Responsive image" />
                                             </a>
                                             <div class="soicalLable soicalLable-2" v-if="coindata.medium_followers">
                                                 {{kFormatter(coindata.medium_followers)}}
@@ -426,8 +442,8 @@
                                             style="max-width:200px;">
                                             <a :href="coindata.medium" target="_blank" class="d-block"
                                                 style="margin-top:20px; margin-bottom:10px;">
-                                                <b-img rounded :src="'https://moonsniper.co/images/static/medium.png'" fluid class="w-50 mx-auto"
-                                                    alt="Responsive image" />
+                                                <b-img rounded :src="'https://moonsniper.co/images/static/medium.png'"
+                                                    fluid class="w-50 mx-auto" alt="Responsive image" />
 
                                             </a>
                                             <div class="soicalLable soicalLable-2" v-if="coindata.medium_followers">
@@ -443,8 +459,8 @@
                                             style="max-width:200px;">
                                             <a :href="coindata.reddit" target="_blank" class="d-block"
                                                 style="margin-top:20px; margin-bottom:10px;">
-                                                <b-img rounded :src="'https://moonsniper.co/images/static/reddit.png'" fluid class="w-50 mx-auto"
-                                                    alt="Responsive image" />
+                                                <b-img rounded :src="'https://moonsniper.co/images/static/reddit.png'"
+                                                    fluid class="w-50 mx-auto" alt="Responsive image" />
 
                                             </a>
                                             <div class="soicalLable soicalLable-2" v-if="coindata.reddit_followers">
@@ -461,7 +477,8 @@
                                             style="max-width:200px; ">
                                             <a :href="coindata.whitepaper" target="_blank" class="d-block"
                                                 style="margin-top:20px; margin-bottom:10px;">
-                                                <b-img rounded :src="'https://moonsniper.co/images/static/whitepaper.png'" fluid
+                                                <b-img rounded
+                                                    :src="'https://moonsniper.co/images/static/whitepaper.png'" fluid
                                                     class="w-50 mx-auto bg-light" alt="Responsive image" />
 
                                             </a>
@@ -478,8 +495,8 @@
                                             style="max-width:200px;">
                                             <a :href="coindata.github" target="_blank" class="d-block"
                                                 style="margin-top:20px; margin-bottom:10px;">
-                                                <b-img rounded :src="'https://moonsniper.co/images/static/github.png'" fluid class="w-50 mx-auto"
-                                                    alt="Responsive image" />
+                                                <b-img rounded :src="'https://moonsniper.co/images/static/github.png'"
+                                                    fluid class="w-50 mx-auto" alt="Responsive image" />
                                             </a>
                                             <div class="soicalLable soicalLable-2" v-if="coindata.github_followers">
                                                 {{kFormatter(coindata.github_followers)}}
@@ -532,6 +549,10 @@
                                             <div class="justify-content-center text-nowrap socialText2 "
                                                 style="margin-top: 10px; margin-bottom: 12px;"
                                                 v-if="userData.currentPlan == 'free'">
+
+                                                <i>
+                                                    <font-awesome-icon icon="fa-solid fa-lock" />
+                                                </i>
                                                 <!-- <feather-icon icon="LockIcon" size="30" style="" /> -->
                                             </div>
                                             <div v-else class="justify-content-center text-nowrap socialText2 "
@@ -552,6 +573,9 @@
                                             <div class="justify-content-center text-nowrap socialText2 "
                                                 style="margin-top: 10px; margin-bottom: 12px;"
                                                 v-if="userData.currentPlan == 'free'">
+                                                <i>
+                                                    <font-awesome-icon icon="fa-solid fa-lock" />
+                                                </i>
                                                 <!-- <feather-icon icon="LockIcon" size="30" style="" /> -->
                                             </div>
                                             <div class="justify-content-center text-nowrap socialText2 text-success-green"
@@ -573,6 +597,9 @@
                                             <div class="justify-content-center text-nowrap socialText2 "
                                                 style="margin-top: 10px; margin-bottom: 12px;"
                                                 v-if="userData.currentPlan == 'free'">
+                                                <i>
+                                                    <font-awesome-icon icon="fa-solid fa-lock" />
+                                                </i>
                                                 <!-- <feather-icon icon="LockIcon" size="30" style="" /> -->
                                             </div>
                                             <div class="justify-content-center text-nowrap socialText2"
@@ -651,60 +678,61 @@
                                         </div>
                                     </div>
                                 </div>
-                                <vueAwesomeCountdown :end-time="new Date().getTime() + 60000">
-                                    <template v-slot:process="{ timeObj }">
-                                        <div class="d-flex">
-                                            <div class="d-iline text-center" style="margin-left: 12px;">
-                                                <div style="max-width:50px">
-                                                    <div class="radius_gradient" style="border-radius:10px">
-                                                        <div class="str_green_gradient text-center"
-                                                            style="width:49px; height:49px; border-radius: 10px;">
-                                                            <span
-                                                                style="font-family: monospace;font-style: normal;font-weight: 400;font-size: 25px; color: #2BFF4D">{{ timeObj.d }}</span><br>
-                                                        </div>
-                                                    </div>
+                                <!-- <vac :end-time="new Date().getTime() + 60000">
+                                    <template v-slot:process="{ timerOutput }"> -->
+                                      
+                                <div class="d-flex">
+                                    <div class="d-iline text-center" style="margin-left: 12px;">
+                                        <div style="max-width:50px">
+                                            <div class="radius_gradient" style="border-radius:10px">
+                                                <div class="str_green_gradient text-center"
+                                                    style="width:49px; height:49px; border-radius: 10px;">
+                                                    <span
+                                                        style="font-family: monospace;font-style: normal;font-weight: 400;font-size: 25px; color: #2BFF4D">{{ timerOutput.d }}</span><br>
                                                 </div>
-                                                <div>D</div>
-                                            </div>
-                                            <div class="d-iline text-center" style="margin-left: 12px;">
-                                                <div style="max-width:50px">
-                                                    <div class="radius_gradient" style="border-radius:10px">
-                                                        <div class="str_green_gradient text-center"
-                                                            style="width:49px ; height:49px ; border-radius: 10px;">
-                                                            <span
-                                                                style="font-family: monospace;font-style: normal;font-weight: 400;font-size: 25px; color: #2BFF4D">{{ timeObj.h }}</span><br>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div>H</div>
-                                            </div>
-                                            <div class="d-iline text-center" style="margin-left: 12px;">
-                                                <div style="max-width:50px">
-                                                    <div class="radius_gradient" style="border-radius:10px">
-                                                        <div class="str_green_gradient text-center"
-                                                            style="width:49px ; height:49px ; border-radius: 10px;">
-                                                            <span
-                                                                style="font-family: monospace;font-style: normal;font-weight: 400;font-size: 25px; color: #2BFF4D">{{ timeObj.m }}</span><br>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div>M</div>
-                                            </div>
-                                            <div class="d-iline text-center" style="margin-left: 12px;">
-                                                <div style="max-width:50px">
-                                                    <div class="radius_gradient" style="border-radius:10px">
-                                                        <div class="str_green_gradient text-center"
-                                                            style="width:49px ; height:49px ; border-radius: 10px;">
-                                                            <span
-                                                                style="font-family: monospace;font-style: normal;font-weight: 400;font-size: 25px; color: #2BFF4D">{{ timeObj.s }}</span><br>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div>S</div>
                                             </div>
                                         </div>
-                                    </template>
-                                    <template v-slot:finish>
+                                        <div>D</div>
+                                    </div>
+                                    <div class="d-iline text-center" style="margin-left: 12px;">
+                                        <div style="max-width:50px">
+                                            <div class="radius_gradient" style="border-radius:10px">
+                                                <div class="str_green_gradient text-center"
+                                                    style="width:49px ; height:49px ; border-radius: 10px;">
+                                                    <span
+                                                        style="font-family: monospace;font-style: normal;font-weight: 400;font-size: 25px; color: #2BFF4D">{{ timerOutput.h }}</span><br>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>H</div>
+                                    </div>
+                                    <div class="d-iline text-center" style="margin-left: 12px;">
+                                        <div style="max-width:50px">
+                                            <div class="radius_gradient" style="border-radius:10px">
+                                                <div class="str_green_gradient text-center"
+                                                    style="width:49px ; height:49px ; border-radius: 10px;">
+                                                    <span
+                                                        style="font-family: monospace;font-style: normal;font-weight: 400;font-size: 25px; color: #2BFF4D">{{ timerOutput.m }}</span><br>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>M</div>
+                                    </div>
+                                    <div class="d-iline text-center" style="margin-left: 12px;">
+                                        <div style="max-width:50px">
+                                            <div class="radius_gradient" style="border-radius:10px">
+                                                <div class="str_green_gradient text-center"
+                                                    style="width:49px ; height:49px ; border-radius: 10px;">
+                                                    <span
+                                                        style="font-family: monospace;font-style: normal;font-weight: 400;font-size: 25px; color: #2BFF4D">{{ timerOutput.s }}</span><br>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>S</div>
+                                    </div>
+                                </div>
+                                <!-- </template> -->
+                                <!-- <template v-slot:finish>
                                         <div class="d-flex">
                                             <div class="d-iline text-center" style="margin-left: 12px;">
                                                 <div style="max-width:50px">
@@ -755,16 +783,18 @@
                                                 <div>S</div>
                                             </div>
                                         </div>
-                                    </template>
-                                </vueAwesomeCountdown>
+                                    </template> -->
+                                <!-- </vac> -->
 
                             </div>
-                            <div v-if="coindata.next_unlock_date_text || coindata.next_unlock_date"
+                            <!-- <div v-if="coindata.next_unlock_date_text || coindata.next_unlock_date"
                                 class="d-inline ml-2 mt-1" style="border-radius: 10px; margin-left: 45px;">
 
                                 <button v-if="notified == true" @click="notifyMe(coindata.symbol,'none')"
                                     class="rounded-pill px-2 " style=" padding: 8px; font-size: 14px;">
-                                    <!-- <feather-icon size="15" icon="BellIcon" /> -->
+                                    <i>
+                                        <font-awesome-icon icon="fa-solid fa-bell" />
+                                    </i>
                                     Remove Notification</button>
                                 <div v-if="notified == true" style="font-size:12px">Will be notified:
                                     {{ notifyList(notifiedType) }} the unlock</div>
@@ -775,7 +805,9 @@
                                     <template #button-content class="p-0 text-left">
                                         <button v-if="notified != true" class="rounded-pill px-2 "
                                             style=" padding: 8px; font-size: 14px;">
-                                            <!-- <feather-icon size="15" icon="BellIcon" /> -->
+                                            <i>
+                                                <font-awesome-icon icon="fa-solid fa-bell" />
+                                            </i>
                                             Notify Me</button>
 
 
@@ -819,7 +851,9 @@
                                     <template #button-content class="p-0">
                                         <button v-if="notified != true" class="rounded-pill px-2 "
                                             style=" padding: 8px; font-size: 14px; background-color: gray;">
-                                            <!-- <feather-icon size="15" icon="BellIcon" /> -->
+                                            <i>
+                                                <font-awesome-icon icon="fa-solid fa-bell" />
+                                            </i>
                                             Notify Me</button>
                                     </template>
 
@@ -827,13 +861,17 @@
 
                                 <button v-if="notified != true" class="rounded-pill px-2" style="padding:6px"
                                     @click="notifyMe(coindata.symbol)">
-                                    <!-- <feather-icon size="15" icon="BellIcon" /> -->
+                                    <i>
+                                        <font-awesome-icon icon="fa-solid fa-bell" />
+                                    </i>
                                     Notify Me</button>
                                 <button v-else class="rounded-pill px-2" style="padding:6px"
                                     @click="notifyMe(coindata.symbol)">
-                                    <!-- <feather-icon size="15" icon="BellIcon" />  -->
+                                    <i>
+                                        <font-awesome-icon icon="fa-solid fa-bell" />
+                                    </i>
                                     Remove Notification</button>
-                            </div>
+                            </div> -->
                         </div>
                         <div no class="mb-1">
                             <div style=" margin-top: 19px;">
@@ -1083,6 +1121,12 @@
     </div>
 </template>
 <script>
+    /* import font awesome icon component */
+    import {
+        FontAwesomeIcon
+    } from '@fortawesome/vue-fontawesome'
+
+    /* import specific icons */
 
     import axios from 'axios'
     import VueApexCharts from "vue3-apexcharts";
@@ -1119,15 +1163,31 @@
         BFormSelectOption,
         BSpinner,
         BAccordion,
-        BOverlay
+        BOverlay,
     } from 'bootstrap-vue-3'
     import {
         copyText
     } from 'vue3-clipboard'
-    import vueAwesomeCountdown from 'vue-awesome-countdown'
+    import {
+        library
+    } from '@fortawesome/fontawesome-svg-core'
+    import {
+        faTwitter
+    } from '@fortawesome/free-brands-svg-icons'
+    import {
+        faCopy
+    } from '@fortawesome/free-regular-svg-icons'
+    import {
+        faLock,
+        faBell,
+        faChevronDown,
+        faChevronUp
+    } from '@fortawesome/free-solid-svg-icons'
+    library.add(faTwitter, faCopy, faLock, faBell, faChevronDown, faChevronUp)
+    import Ripple from 'vue3-whr-ripple-directive'
     export default {
         components: {
-            vueAwesomeCountdown,
+            FontAwesomeIcon,
             BootstrapVue3,
             BTable,
             BAccordion,
@@ -1164,12 +1224,19 @@
             VueApexCharts,
             ExchangesTable
         },
+        directives: {
+            Ripple,
+
+        },
         props: {
             coin: String,
             active: Boolean
         },
         data() {
             return {
+                countDownToTime: null,
+                countDownToTime2: null,
+                timerOutput: [],
                 coindata: [],
                 dataloaded: false,
                 supplyChart: {
@@ -1548,12 +1615,14 @@
                         }
                     },
 
+
                 },
                 TradeHistoryseries: [{
                     name: 'Trading Volume',
                     data: []
                 }],
             }
+
         },
         methods: {
             doCopy(text) {
@@ -1600,7 +1669,7 @@
                                 }
                             }
                             this.seven_DaysChartseries[0].data = sparklines;
-                            this.dataloaded = true;            
+                            this.dataloaded = true;
                         }
 
                     })
@@ -1930,7 +1999,7 @@
 
             },
             checkUserPlan(val) {
-                return true;
+                return false;
                 if (this.userData.currentPlan == 'free' && val < 1 || this.userData.currentPlan == 'free' &&
                     val >=
                     5) {
@@ -2073,6 +2142,49 @@
 
                 return score;
             },
+            isInThePast() {
+               
+            },
+            startTimer: function () {
+                this.countDownToTime = Math.round((new Date()).getTime() );
+                this.countDownToTime2 = Math.round((new Date(this.coindata.next_unlock_date)).getTime() );
+                
+                if(this.countDownToTime2 > this.countDownToTime)
+                {
+                   
+                const timeDifference = this.countDownToTime2 - this.countDownToTime;
+                const millisecondsInOneSecond = 1000;
+                const millisecondsInOneMinute = millisecondsInOneSecond * 60;
+                const millisecondsInOneHour = millisecondsInOneMinute * 60;
+                const millisecondsInOneDay = millisecondsInOneHour * 24;
+                const differenceInDays = timeDifference / millisecondsInOneDay;
+                const remainderDifferenceInHours = (timeDifference % millisecondsInOneDay) / millisecondsInOneHour;
+                const remainderDifferenceInMinutes = (timeDifference % millisecondsInOneHour) /
+                    millisecondsInOneMinute;
+                const remainderDifferenceInSeconds = (timeDifference % millisecondsInOneMinute) /
+                    millisecondsInOneSecond;
+                const remainingDays = Math.floor(differenceInDays);
+                const remainingHours = Math.floor(remainderDifferenceInHours);
+                const remainingMinutes = Math.floor(remainderDifferenceInMinutes);
+                const remainingSeconds = Math.floor(remainderDifferenceInSeconds);
+                this.timerOutput.d = remainingDays;
+                this.timerOutput.h = remainingHours;
+                this.timerOutput.m = remainingMinutes;
+                this.timerOutput.s = remainingSeconds;
+                }else{
+                    this.timerOutput.d = 0;
+                this.timerOutput.h = '00';
+                this.timerOutput.m = '00';
+                this.timerOutput.s = '00';
+                }
+              
+               
+            }
+        },
+        mounted() {
+            setInterval(() => {
+                this.startTimer()
+            }, 1000);
         },
         watch: {
             'active': function (newVal, oldVal) {
@@ -2084,189 +2196,235 @@
     }
 </script>
 <style>
-#moon-app-popup .b-overlay-wrap.position-relative
-{
-   
-}
-#moon-app-popup{
-    max-height: 90vh;
-    overflow-y:auto;
-    overflow-x:hidden;
-}
- #moon-app-popup::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-    cursor: pointer;
-}
-#moon-app-popup::-webkit-scrollbar-corner {
-    background: rgba(0, 0, 0, 0);
-    z-index: 999;
-}
+    #moon-app-popup .b-overlay-wrap.position-relative {}
 
-#moon-app-popup::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    -webkit-box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.3);
-    background-color: #ffffff;
-
-}
-
-
-.tw-dark #moon-app-popup .accordion-body{
-    background: #232228 !important;
-    border-color: #3b4253;
-  }
-  .accordion-body{
-  }
-.MoonApp-div .accordion-item{
-
-    font-family: 'Poppins-Light';
-      font-style: normal;
-      font-weight: 400;
-      font-size: 15px;
-      border-left: none;
-    border-right: none;
-    border-top: none;
-  }
-  .tw-dark .MoonApp-div .accordion-item{
-
-      color:fff !important; 
-      background: #232228 !important;
-      border-color: #3b4253;
-  }
-  .tw-dark .MoonApp-div accordion-button:not(.collapsed) {
-    color: #fff;
-    background: #232228 !important;
-    border-color: #3b4253;
-    box-shadow: inset 0 calc(-1 * var(--bs-accordion-border-width)) 0 var(--bs-accordion-border-color);
-  }
-  .tw-dark .MoonApp-div
-  {
-    color:#fff !important; 
-  }
-  .tw-dark .chart-desc  {
-    color: white !important;
-    font-size: 14px;
-}
-.tw-dark  .chart-desc a {
-    color: white !important;
-}
-.apexcharts-tooltip {
-    background: #f3f3f3;
-    color: #78909C;
-}
-.poppins-font {
-    font-family: 'Poppins-Light';
-}
-  /* Accordion CSS */
-  button.accordion-button {
-    font-family: 'Poppins-Light'; 
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    padding-top: 14px;
-    padding-bottom: 14px;
+    #moon-app-popup {
+        max-height: 90vh;
+        overflow-y: auto;
+        overflow-x: hidden;
     }
-  .tw-dark  button.accordion-button {
-    background: #232228 !important;
-    border-color: #3b4253;
-    color: white;
-    opacity:0.7;
+
+    #moon-app-popup::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+        cursor: pointer;
     }
-   .collapse-title {
+
+    #moon-app-popup::-webkit-scrollbar-corner {
+        background: rgba(0, 0, 0, 0);
+        z-index: 999;
+    }
+
+    #moon-app-popup::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.3);
+        background-color: #ffffff;
+
+    }
+
+
+    .tw-dark #moon-app-popup .accordion-body {
+        background: #232228 !important;
+        border-color: #3b4253;
+    }
+
+    .accordion-body {}
+
+    .MoonApp-div .accordion-item {
+
+        font-family: 'Poppins-Light';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 15px;
+        border-left: none;
+        border-right: none;
+        border-top: none;
+    }
+
+    .tw-dark .MoonApp-div .accordion-item {
+
+        color: fff !important;
+        background: #232228 !important;
+        border-color: #3b4253;
+    }
+
+    .tw-dark .MoonApp-div accordion-button:not(.collapsed) {
+        color: #fff;
+        background: #232228 !important;
+        border-color: #3b4253;
+        box-shadow: inset 0 calc(-1 * var(--bs-accordion-border-width)) 0 var(--bs-accordion-border-color);
+    }
+
+    .tw-dark .MoonApp-div {
+        color: #fff !important;
+    }
+
+    .tw-dark .darkBackgroundBlack {
+        background: #0A070E !important;
+    }
+
+    .tw-dark .chart-desc {
+        color: white !important;
+        font-size: 14px;
+    }
+
+    .tw-dark .chart-desc a {
+        color: white !important;
+    }
+
+    .apexcharts-tooltip {
+        background: #f3f3f3;
+        color: #78909C;
+    }
+
+    .poppins-font {
+        font-family: 'Poppins-Light';
+    }
+
+    /* Accordion CSS */
+    button.accordion-button {
+        font-family: 'Poppins-Light';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        padding-top: 14px;
+        padding-bottom: 14px;
+    }
+
+    .tw-dark button.accordion-button {
+        background: #232228 !important;
+        border-color: #3b4253;
+        color: white;
+        opacity: 0.7;
+    }
+
+    .collapse-title {
         font-weight: 400;
         font-size: 16px;
         opacity: 0.7;
     }
+
+    .tw-dark .str_green_gradient {
+        background: linear-gradient(146.03deg, #2bff4d -241%, #1c1920 55.77%), white !important;
+    }
+
+
     .tw-dark .accordion-body {
         background: #232228 !important;
         border-color: #3b4253;
-        color:#fff;
+        color: #fff;
     }
+
     .accordion-button:focus {
         z-index: 3;
         box-shadow: none !important;
-        border-color:none !important;
+        border-color: none !important;
         outline: 0px;
-      }
+    }
+
     /*card css*/
     .inner-cbody {
-        padding-left:0px !important;
-        padding-right:0px !important;
+        padding-left: 0px !important;
+        padding-right: 0px !important;
         padding-top: 8px;
     }
+
     .tw-dark .card-body {
         background: #232228 !important;
         border-color: #3b4253;
-        color:#fff;
-    }
-    #moon-app-popup .card {
-        border:none;
+        color: #fff;
     }
 
-     .card-body  .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    #moon-app-popup .card {
+        border: none;
+    }
+
+    .card-body .nav-tabs .nav-item.show .nav-link,
+    .nav-tabs .nav-link.active {
         background: transparent !important;
-    border: none !important;
+        border: none !important;
     }
-    .tw-dark .card-body  .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
-    color: #fff !important;
+
+    .tw-dark .card-body .nav-tabs .nav-item.show .nav-link,
+    .nav-tabs .nav-link.active {
+        color: #fff !important;
     }
-    .graph_tab-2 ul, .graph_tab-2 ul{
+
+    .graph_tab-2 ul,
+    .graph_tab-2 ul {
         display: flex !important;
         flex-wrap: nowrap !important;
-        border:none;
+        border: none;
     }
-    .graph_tab-1 ul.nav.nav-tabs
-    {
+
+    .graph_tab-1 ul.nav.nav-tabs {
         border: none;
         margin-left: 87px;
     }
-    
-    .tw-dark .nav-link{
-        color:#fff;
+
+    .tw-dark .nav-link {
+        color: #fff;
     }
-    .graph_tab-2 ul.nav.nav-tabs button,  .graph_tab ul.nav.nav-tabs button{
-        padding:0 !important;
+
+    .graph_tab-2 ul.nav.nav-tabs button,
+    .graph_tab ul.nav.nav-tabs button {
+        padding: 0 !important;
         margin-right: 1rem;
     }
-    .fs-6{
+
+    .fs-6 {
         border-radius: 10px;
-    font-size: 12px !important;
-    font-weight: 400;
-    font-family: 'Poppins-Light';
-    background: white;
-    font-style: normal;
-    padding: 6px 11px;
-    color: #322a2a;
+        font-size: 12px !important;
+        font-weight: 400;
+        font-family: 'Poppins-Light';
+        background: white;
+        font-style: normal;
+        padding: 6px 11px;
+        color: #322a2a;
     }
+
     .radius_gradient {
         background: linear-gradient(146.03deg, lime 7%, rgba(255, 255, 255, 0) 50%) !important;
     }
+
     .radius_gradient {
         margin: 10px;
         padding: 1px;
         border-radius: 30px;
     }
-   .radius_gradient {
+
+    .radius_gradient {
         max-width: 240px;
         /* margin: auto; */
     }
-   .str_grey_gradient.card {
+
+    .str_grey_gradient.card {
         margin-bottom: 0;
         border-radius: 30px;
     }
+
     .str_grey_gradient .card-body {
-        border-radius: 30px;
+        border-radius: 29px;
         padding: 1rem;
         padding-top: 0.42rem;
         background: linear-gradient(146.03deg, #2bff4d -241%, #2c2b31 55.77%), white !important;
+        border-bottom-left-radius: 26px;
+        border-bottom-right-radius: 26px;
     }
+
     .soicalLable-2 {
         font-size: 15px !important;
         height: 30px;
     }
+
     .soicalLable.darkWhiteText.lableText {
         height: 32px;
     }
+
+    .soicalLable {
+        color: #fff;
+    }
+
     .soicalLable {
         font-family: 'Poppins-Light';
         font-style: normal;
@@ -2274,9 +2432,7 @@
         font-size: 12px !important;
         opacity: 0.8;
     }
-    .socialText2 {
-        height: 33px;
-    }
+
     .socialText2 {
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -2285,21 +2441,93 @@
         font-style: normal;
         font-weight: 400;
         font-size: 20px;
+        height: 33px;
+        color: #fff;
     }
-    button.accordion-button.collapsed::after {
-       /* background-image: var(--bs-accordion-btn-active-icon); */
-    }
+
     .accordion-button::after {
-        --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='white'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
-        --bs-accordion-btn-active-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='white'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
         background-size: 14px !important;
     }
-    .overlay-height{
-        height:80vh
-      }
+
+    .tw-dark .accordion-button::after {
+        --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='white'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+        --bs-accordion-btn-active-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='white'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+
+    }
+
+    .overlay-height {
+        height: 80vh
+    }
+
+    .CopyButton {
+        margin-right: 13px;
+        background-color: transparent;
+        cursor: pointer;
+        border: none !important;
+        color: #fff;
+        padding: 0.486rem 1rem;
+    }
+
+    .CopyButton:hover {
+        background-color: transparent !important;
+    }
+
+    button#dropdown-left1 {
+        z-index: 1;
+        color: white;
+        border: 0;
+        box-shadow: none;
+    }
+
+    .darkWhiteText {
+        color: white !important;
+    }
+
+    ul.dropdown-menu {
+        padding: 0;
+    }
+    .b-overlay.position-absolute div{
+        background-color: #232228 !important;
+    }
+    div ul li.cunningDrop {
+        padding-right: 15px;
+        background: #0A070E !important;
+    }
+
+    .cunningDrop .dropdown-menu.show {
+        max-height: 275px !important;
+    }
+
+    li.cunningDrop.dropdown-mine.darkBackgroundBlack {
+        z-index: 999;
+        height: 270px;
+        overflow: auto;
+    }
+
+
+    li.cunningDrop.dropdown-mine.darkBackgroundBlack::-webkit-scrollbar {
+        width: 3px;
+        height: 3px;
+        cursor: pointer;
+    }
+
+    li.cunningDrop.dropdown-mine.darkBackgroundBlack::-webkit-scrollbar-corner {
+        background: rgba(0, 0, 0, 0);
+        z-index: 999;
+    }
+
+    li.cunningDrop.dropdown-mine.darkBackgroundBlack::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.3);
+        background-color: #ffffff;
+
+    }
+    .Contract-div #dropdown-left1{
+        padding:0 !important;
+    }
     @font-face {
         font-family: "Poppins-Light" !important;
         src: local("Poppins-Light"),
-         url(../fonts/Poppins-Light.ttf) format("truetype");
-      }
+            url(../fonts/Poppins-Light.ttf) format("truetype");
+    }
 </style>

@@ -185,8 +185,12 @@
 .tw-dark  .exchangetdLink{
  color: rgb(255, 255, 255) !important;
 }
-
-.exchangetdLink tr td{
-    padding: 0.72rem 2rem;
+.tw-dark .table td {
+    color: hsla(0,0%,100%,.6);
 }
+.tw-dark .ExchangeTableDiv tr td{
+    padding: 0.72rem 2rem;
+    border:none;
+}
+
 </style>

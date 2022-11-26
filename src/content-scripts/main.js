@@ -4,8 +4,8 @@ import Popup from "./Popup.vue";
 import "@/styles/main.css";
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue-3/dist/bootstrap-vue-3.css'
+import vueAwesomeCountdown from 'vue-awesome-countdown'
 const MOUNT_EL_ID = "as-awesome-extension";
-
 let mountEl = document.getElementById(MOUNT_EL_ID);
 if (mountEl) {
   mountEl.innerHTML = "";
@@ -13,8 +13,11 @@ if (mountEl) {
 mountEl = document.createElement("div");
 mountEl.setAttribute("id", MOUNT_EL_ID);
 document.body.appendChild(mountEl);
+  const vm = createApp(Popup)
+  .use(vueAwesomeCountdown, 'vac')
+  .mount(mountEl);
+    
 
-const vm = createApp(Popup).mount(mountEl);
 
 /////////////////////////////
 
