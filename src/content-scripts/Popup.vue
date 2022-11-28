@@ -16,7 +16,7 @@ export default defineComponent({
       coin.value = ''
     }
     const loadCoinById = (id)=>{
-        axios.post(`https://moonsniper.co/api/extention-coin-data-coingecko?coin=${id}`)
+        axios.post(`https://moonsniper.co/api/extension-coin-data-coingecko?coin=${id}`)
         .then(res=>{
          data.value = res.data
         })

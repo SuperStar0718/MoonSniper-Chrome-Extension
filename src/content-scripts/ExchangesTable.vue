@@ -108,7 +108,7 @@
             loadExchanges() {
                 this.exchangesLoaded= false;
                 this.isBusy = true;
-                axios.post('https://moonsniper.co/api/exchanges-by-token-extention?token='+this.token.symbol+'&page=' + this.pageNumber).then(res => {
+                axios.post('https://moonsniper.co/api/exchanges-by-token-extension?token='+this.token.symbol+'&page=' + this.pageNumber).then(res => {
                     if (res.data.status == true) {
                         this.exchangeData = res.data.exchanges;
                         this.exchangesLoaded= true;

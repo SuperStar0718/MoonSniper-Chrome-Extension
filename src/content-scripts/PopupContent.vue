@@ -1642,7 +1642,7 @@
             loadCoins() {
                 this.selectedContract = null;
                 this.dataloaded = false
-                axios.post(`https://moonsniper.co/api/extention-coin-data-coingecko?coin=${this.coin}`)
+                axios.post(`https://moonsniper.co/api/extension-coin-data-coingecko?coin=${this.coin}`)
                     .then(res => {
                         if (res.data.status == true) {
                             this.coindata = res.data.coin;
@@ -1657,8 +1657,18 @@
                             this.loadSupplyChart();
                             this.loadVestingChart();
                             this.loadTradeHystory();
-                            let sparklines = this.coindata.sparkline_in_7d.split("|").map(Number);
-                            sparklines = sparklines.slice(0, -1);
+                            let sparklines = [];
+                            if (this.coindata.sparkline_in_7d != null) {
+                                this.coindata.sparkline_in_7d = this.coindata.sparkline_in_7d.trim();
+                                if (this.coindata.sparkline_in_7d.charAt(this.coindata.sparkline_in_7d.length - 1) == '|') {
+                                    this.coindata.sparkline_in_7d = this.coindata.sparkline_in_7d.substr(0, this.coindata.sparkline_in_7d.length - 1);
+                                }
+                                sparklines = this.coindata.sparkline_in_7d.split("|").map(Number);
+
+                                for (let s = 168; s < sparklines.length;) {
+                                    sparklines.shift();
+                                }
+                            }
                             for (let i = 0; i < 7; i++) {
                                 for (let j = 0; j <= 23; j++) {
                                     var d = new Date();
@@ -1702,7 +1712,7 @@
             },
             loadTradeHystory() {
                 this.TradeHistoryOptions.xaxis.categories = [];
-                axios.post(`https://moonsniper.co/api/get_trading_volume_history-extention`, {
+                axios.post(`https://moonsniper.co/api/get_trading_volume_history-extension`, {
                         coin_id: this.coindata.coin_id,
                         symbol: this.coindata.symbol
                     })

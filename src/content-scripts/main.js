@@ -4,7 +4,6 @@ import Popup from "./Popup.vue";
 import "@/styles/main.css";
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue-3/dist/bootstrap-vue-3.css'
-import vueAwesomeCountdown from 'vue-awesome-countdown'
 const MOUNT_EL_ID = "as-awesome-extension";
 let mountEl = document.getElementById(MOUNT_EL_ID);
 if (mountEl) {
@@ -14,24 +13,25 @@ mountEl = document.createElement("div");
 mountEl.setAttribute("id", MOUNT_EL_ID);
 document.body.appendChild(mountEl);
   const vm = createApp(Popup)
-  .use(vueAwesomeCountdown, 'vac')
   .mount(mountEl);
     
 
 
 /////////////////////////////
-
-const featureBoxRight = document.querySelectorAll('div.coin-table tbody tr');
-
 var option = document.createElement("td");
 option.classList = "table-td-moon"
-option.setAttribute("style","width: 53px;")
-if (featureBoxRight) {
+var domain = window.location.href;
+let featureBoxRight = [];
+if(domain.includes("coingecko.com"))
+{
+ featureBoxRight = document.querySelectorAll('div.coin-table tbody tr');
+ if (featureBoxRight) {
   for (let i = 0; i < featureBoxRight.length; i++) {
 
     var symbol = featureBoxRight[i].querySelectorAll('a span')[1].innerHTML.trim();
 
     option.innerHTML = '<span ><img style=" width:40px; cursor: pointer;" class="moon-logo" src="https://moonsniper.co/images/moon/icon/fullcolor.png"></span>';
+    option.setAttribute("style","width: 53px; ")
 
     featureBoxRight[i].prepend(option.cloneNode(true));
 
@@ -42,6 +42,63 @@ if (featureBoxRight) {
     specificMoon.symbol = symbol;
   }
 }
+}
+else if(domain.includes("coinmarketcap.com"))
+{
+  var thHtml = document.createElement("th");
+  thHtml.classList = "table-th-moon stickyTop";
+  thHtml.innerHTML ="Moon"
+   document.querySelector('.cmc-body-wrapper table thead tr').prepend(thHtml.cloneNode(true));
+
+
+   featureBoxRight = document.querySelectorAll('.cmc-body-wrapper table tbody tr');
+   if (featureBoxRight) {
+    for (let i = 0; i < featureBoxRight.length; i++) {
+      let symbol;
+      if(featureBoxRight[i].querySelector('.coin-item-symbol') != null)
+      {
+         symbol = featureBoxRight[i].querySelector('.coin-item-symbol').innerHTML.trim();
+      }
+      option.innerHTML = '<span ><img style=" width:40px; cursor: pointer;" class="moon-logo" src="https://moonsniper.co/images/moon/icon/fullcolor.png"></span>';
+      option.setAttribute("style","width: 53px; padding-left:0; padding-right:0")
+      featureBoxRight[i].prepend(option.cloneNode(true));
+      //Add data of symbol
+      var specificMoon = featureBoxRight[i].getElementsByTagName("span")[0];
+  
+      specificMoon.addEventListener('click', triggerPopup, false);
+      if(symbol)
+      specificMoon.symbol = symbol;
+    }
+  }
+   
+}else if(domain.includes("dexscreener.com"))
+{
+  featureBoxRight = document.querySelectorAll('.custom-j3hajj a.chakra-link.custom-1oo4dn7');
+
+
+   if (featureBoxRight) {
+    for (let i = 0; i < featureBoxRight.length; i++) {
+      var dexSpan = document.createElement("span");
+      dexSpan.classList = "table-td-moon chakra-badge custom-1hloedr"
+      var symbol = featureBoxRight[i].querySelector('span.chakra-text.custom-q28k12').innerHTML.trim();
+      dexSpan.innerHTML = '<span ><img style=" width:40px; cursor: pointer;" class="moon-logo" src="https://moonsniper.co/images/moon/icon/fullcolor.png"></span>';
+      dexSpan.setAttribute("style","width: 53px; padding-left:0; padding-right:0")
+      featureBoxRight[i].firstChild.prepend(dexSpan.cloneNode(true));
+      var specificMoon = featureBoxRight[i].getElementsByTagName("span")[0];
+      specificMoon.addEventListener('click', triggerPopup, false);
+      if(symbol)
+      specificMoon.symbol = symbol;
+    }
+  }
+  featureBoxRight = document.querySelectorAll('div.coin-table tbody tr');
+}
+else{
+   featureBoxRight = document.querySelectorAll('div.coin-table tbody tr');
+
+}
+
+
+
 const body = document.querySelector('body');
 
 if (body) {
@@ -61,7 +118,7 @@ if (body) {
 
 
 function triggerPopup(event){
-  
+  event.stopPropagation()
   console.log("popup triggered with symbol: " + event.currentTarget.symbol);
   vm.visible = !vm.visible;
   if(event.currentTarget.symbol)
