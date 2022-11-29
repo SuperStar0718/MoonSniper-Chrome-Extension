@@ -238,7 +238,7 @@
                         </div>
                     </div>
                 </div>
-                <b-accordion>
+                <b-accordion free>
                     <b-accordion-item visible v-if="coindata.sparkline_in_7d&& coindata.sparkline_in_7d.length>0
                                     || coindata.roi_times ||coindata.round_price && coindata.round_price !=0 && coindata.current_price&& coindata.current_price !=0
                                     || coindata.total_volume
