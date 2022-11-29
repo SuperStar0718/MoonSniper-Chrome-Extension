@@ -16,7 +16,7 @@ export default defineComponent({
       coin.value = ''
     }
     const loadCoinById = (id)=>{
-        axios.post(`https://moonsniper.co/api/extension-coin-data-coingecko?coin=${id}`)
+        axios.post(`http://localhost:8000/api/extension-coin-data-coingecko?coin=${id}`)
         .then(res=>{
          data.value = res.data
         })
@@ -91,7 +91,13 @@ export default defineComponent({
   background: #232228 !important;
   border-color: #3b4253;
 }
-
+#as-awesome-extension{
+  z-index: 999;
+    position: sticky;
+}
+.css-13euu76 {
+  padding-left: 42px !important;
+}
 @font-face {
   font-family: "Poppins-Light";
   src: local("Poppins-Light"),

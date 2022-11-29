@@ -566,9 +566,8 @@
                                         </b-card>
                                     </div>
 
-                                    <div class="radius_gradient cursor-pointer" style="width:110px;"
-                                        v-if="coindata.social_engagement_change">
-                                        <div title="" class="mx-auto innerCard text-center str_grey_gradient"
+                                    <div class="radius_gradient cursor-pointer" style="width:110px;" v-if="coindata.social_engagement_change">
+                                        <b-card  title="" class="mx-auto innerCard text-center str_grey_gradient"
                                             style="max-width:200px;">
                                             <div class="justify-content-center text-nowrap socialText2 "
                                                 style="margin-top: 10px; margin-bottom: 12px;"
@@ -589,7 +588,7 @@
                                                 Engagement
                                             </div>
 
-                                        </div>
+                                        </b-card >
                                     </div>
                                     <div class="radius_gradient cursor-pointer" style="width:110px;">
                                         <b-card title="" class="mx-auto innerCard text-center str_grey_gradient"
@@ -1642,7 +1641,7 @@
             loadCoins() {
                 this.selectedContract = null;
                 this.dataloaded = false
-                axios.post(`https://moonsniper.co/api/extension-coin-data-coingecko?coin=${this.coin}`)
+                axios.post(`http://localhost:8000/api/extension-coin-data-coingecko?coin=${this.coin}`)
                     .then(res => {
                         if (res.data.status == true) {
                             this.coindata = res.data.coin;
