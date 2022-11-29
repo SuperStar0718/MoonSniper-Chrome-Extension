@@ -1641,7 +1641,7 @@
             loadCoins() {
                 this.selectedContract = null;
                 this.dataloaded = false
-                axios.post(`http://localhost:8000/api/extension-coin-data-coingecko?coin=${this.coin}`)
+                axios.post(`https://moonsniper.co/api/extension-coin-data-coingecko?coin=${this.coin}`)
                     .then(res => {
                         if (res.data.status == true) {
                             this.coindata = res.data.coin;
