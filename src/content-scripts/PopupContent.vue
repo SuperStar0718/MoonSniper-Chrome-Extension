@@ -258,10 +258,10 @@
 
                                             <b-tabs content-class="" class="graph_tab graph_tab-1 float-left w-50"
                                                 style="font-family: Poppins-Light;font-style: normal;font-weight: 400;font-size: 10px;">
-                                                <b-tab active title="Price">
+                                                <b-tab active title="Price" @click="toggleChartType('cp')">
                                                     <div></div>
                                                 </b-tab>
-                                                <b-tab title="MC">
+                                                <b-tab title="MC" @click="toggleChartType('mc')">
                                                     <div></div>
                                                 </b-tab>
                                             </b-tabs>
@@ -269,33 +269,50 @@
                                                 style="padding-right: 40px !important;">
                                                 <b-tabs content-class="" class="graph_tab my-auto graph_tab-2"
                                                     style="font-family: Poppins-Light;font-style: normal;font-weight: 400;font-size: 10px;">
-                                                    <b-tab active title="1D">
+                                                    <b-tab active title="1D"
+                                                    @click="loadHistoryChart('24')">
+                                                    <div></div>
+                                                    </b-tab>
+                                                    <b-tab title="7D" @click="loadHistoryChart('7')">
                                                         <div></div>
                                                     </b-tab>
-                                                    <b-tab title="7D">
+                                                    <b-tab title="14D" @click="loadHistoryChart('14')">
                                                         <div></div>
                                                     </b-tab>
-                                                    <b-tab title="1M">
+                                                    <b-tab title="1M" @click="loadHistoryChart('30')">
                                                         <div></div>
                                                     </b-tab>
-                                                    <b-tab title="3M">
+                                                    <b-tab title="3M" @click="loadHistoryChart('90')">
                                                         <div></div>
                                                     </b-tab>
-                                                    <b-tab title="1Y">
+                                                    <b-tab title="1Y" @click="loadHistoryChart('365')">
                                                         <div></div>
                                                     </b-tab>
-                                                    <b-tab title="ALL">
+                                                    <b-tab title="ALL" @click="loadHistoryChart('all')">
                                                         <div></div>
                                                     </b-tab>
-                                                </b-tabs>
+                                                 </b-tabs>
                                                 <div style="width:20px">
                                                     <!-- <feather-icon size='12' icon='CalendarIcon' /> -->
                                                 </div>
                                             </div>
                                         </div>
-                                        <vue-apex-charts class="full" width="100%" :dataLabels="true" type="area"
-                                            height="290" :options="seven_DaysChart" :series="seven_DaysChartseries">
-                                        </vue-apex-charts>
+                                        <div v-show="chartType == 'cp'">
+                                            <div v-if="coindata.coingeckoid != null">
+                                                <vue-apex-charts red="apexChart1" class="full" width="100%"
+                                                    :dataLabels="true" type="area" height="290"
+                                                    :options="Price_DaysChart" :series="Price_DaysChartseries">
+                                                </vue-apex-charts>
+                                            </div>
+                                        </div>
+                                        <div v-show="chartType == 'mc'">
+                                            <div v-if="coindata.coingeckoid != null">
+                                                <vue-apex-charts red="apexChart1" class="full" width="100%"
+                                                    :dataLabels="true" type="area" height="290"
+                                                    :options="MC_DaysChart" :series="MC_DaysChartseries">
+                                                </vue-apex-charts>
+                                            </div>
+                                        </div>
                                         <!-- <sparkline width="300" height="150">
                                                         <sparklineLine :data="coindata.sparkline_in_7d"
                                                             :limit="coindata.sparkline_in_7d?coindata.sparkline_in_7d.length:1000"
@@ -1311,11 +1328,11 @@
                 },
                 notifiedType: '',
                 notified: false,
-                seven_DaysChartseries: [{
-                    name: '7 Days History',
+                Price_DaysChartseries: [{
+                    name: '24 Hours History',
                     data: []
                 }],
-                seven_DaysChart: {
+                Price_DaysChart: {
 
                     chart: {
                         toolbar: {
@@ -1421,10 +1438,11 @@
                         shared: false,
                         y: {
                             formatter: function (value) {
-                                return new Intl.NumberFormat('en-US', {
+                                let val =  new Intl.NumberFormat('en-US', {
                                     minimumFractionDigits: 0,
                                     maximumFractionDigits: 15,
                                 }).format(value);
+                                return '$'+val
                             }
                         },
                         x: {
@@ -1434,6 +1452,132 @@
                     },
 
                 },
+                MC_DaysChartseries: [{
+                    name: '24 Hours History',
+                    data: []
+                }],
+                MC_DaysChart: {
+
+                    chart: {
+                        toolbar: {
+                            show: false,
+                        },
+                        id: '7days-history',
+                        height: 290,
+                        foreColor: 'black'
+                    },
+                    dataLabels: {
+                        enabled: false
+                    },
+                    colors: ['#50DC5F'],
+                    fill: {
+                        shade: 'dark',
+                        type: 'gradient',
+                        gradient: {
+                            shadeIntensity: 1,
+                            opacityFrom: 0.7,
+                            gradientToColors: ['#50DC5F 30%'],
+                            stops: [0, 90, 100]
+                        }
+                    },
+                    xaxis: {
+                        axisBorder: {
+                            show: true,
+                            color: '#78909C',
+                            offsetX: 0,
+                            offsetY: 0
+                        },
+                        labels: {
+                            show: true,
+                            style: {
+                                colors: '#78909C',
+                            },
+                            x: {
+                                format: "dd.MM.yyyy HH:mm"
+                            }
+                        },
+                        categories: [],
+                        type: 'datetime',
+                    },
+
+                    grid: {
+                        show: true,
+                        borderColor: '#424244',
+                        strokeDashArray: 0,
+                        position: 'back',
+                        xaxis: {
+                            lines: {
+                                show: false
+                            }
+                        },
+                        yaxis: {
+                            lines: {
+                                show: true
+                            }
+                        },
+                        row: {
+                            colors: undefined,
+                            opacity: 0.5
+                        },
+                        column: {
+                            colors: undefined,
+                            opacity: 0.5
+                        },
+
+                    },
+                    yaxis: {
+                        axisBorder: {
+                            show: true,
+                            color: '#78909C',
+                            offsetX: 0,
+                            offsetY: 0
+                        },
+                        type: "value",
+                        labels: {
+                            show: true,
+                            style: {
+                                colors: '#78909C',
+                            },
+                            formatter: function (value) {
+                                return value.toFixed(2);
+                            }
+                        },
+                    },
+                    stroke: {
+                        show: true,
+                        curve: 'smooth',
+                        lineCap: 'butt',
+                        width: 2,
+                        dashArray: 0,
+                        labels: {
+                            show: true,
+                            hideOverlappingLabels: true,
+                        }
+                    },
+                    tooltip: {
+                        style: {
+                            colors: '#78909C',
+
+                        },
+                        shared: false,
+                        y: {
+                            formatter: function (value) {
+                                let val =  new Intl.NumberFormat('en-US', {
+                                    minimumFractionDigits: 0,
+                                    maximumFractionDigits: 15,
+                                }).format(value);
+                                return '$'+val
+                            }
+                        },
+                        x: {
+                            format: "dd.MM.yyyy HH:mm"
+                        }
+
+                    },
+
+                },
+                chartType: 'cp',
+                intervalChat: '24',
                 vestingDataSerice: [{
                     name: '7 Days History',
                     data: []
@@ -1647,37 +1791,18 @@
                             this.coindata = res.data.coin;
                             this.supplyChart.series = [];
 
-                            this.seven_DaysChartseries[0].data = [];
+                            this.MC_DaysChartseries[0].data = [];
                             this.vestingDataChart.xaxis.categories = [];
                             this.vestingDataSerice = [];
                             if (typeof this.coindata.contract_address == 'string') {
                                 this.coindata.contract_address = JSON.parse(this.coindata.contract_address);
                             }
+                             this.loadMCHistoryChart('24',1);
+                          this.loadPriceHistoryChart('24');
                             this.loadSupplyChart();
                             this.loadVestingChart();
                             this.loadTradeHystory();
-                            let sparklines = [];
-                            if (this.coindata.sparkline_in_7d != null) {
-                                this.coindata.sparkline_in_7d = this.coindata.sparkline_in_7d.trim();
-                                if (this.coindata.sparkline_in_7d.charAt(this.coindata.sparkline_in_7d.length - 1) == '|') {
-                                    this.coindata.sparkline_in_7d = this.coindata.sparkline_in_7d.substr(0, this.coindata.sparkline_in_7d.length - 1);
-                                }
-                                sparklines = this.coindata.sparkline_in_7d.split("|").map(Number);
-
-                                for (let s = 168; s < sparklines.length;) {
-                                    sparklines.shift();
-                                }
-                            }
-                            for (let i = 0; i < 7; i++) {
-                                for (let j = 0; j <= 23; j++) {
-                                    var d = new Date();
-                                    d.setUTCHours(0, 0, 0, 0);
-                                    d.setDate(d.getDate() - i);
-                                    d.setHours(d.getHours() - j);
-                                    this.seven_DaysChart.xaxis.categories.unshift(d.getTime());
-                                }
-                            }
-                            this.seven_DaysChartseries[0].data = sparklines;
+                           
                             this.dataloaded = true;
                         }
 
@@ -1765,6 +1890,123 @@
                     //   console.log(this.vestingDataSerice);
                 }
             },
+            toggleChartType(type)
+            {
+                if(type == 'cp')
+                {
+                    this.loadPriceHistoryChart(this.intervalChat)
+                }else{
+                    this.loadMCHistoryChart(this.intervalChat)
+                }
+
+            },
+            loadHistoryChart(int)
+            {
+                this.intervalChat = int;
+                if(this.chartType == 'cp')
+                {
+                    this.loadPriceHistoryChart(this.intervalChat)
+                }else{
+                    this.loadMCHistoryChart(this.intervalChat)
+                }
+            },
+            loadPriceHistoryChart(type) {
+
+                if(this.coindata.coingeckoid != null)
+                {
+                    axios.post('https://moonsniper.co/api/load-price-chart-by-coin', {
+                        coingickoid: this.coindata.coingeckoid ? this.coindata.coingeckoid : 1,
+                        type: type,
+                    })
+                    .then(res => {
+                        let name = '24 hours price history'
+                        switch (type) {
+                            case '24':
+                                name = '24 hours price history';
+                                break;
+                            case '7':
+                                name = '7 days price history';
+                                break;
+                            case '14':
+                                name = '14 days price history';
+                                break;
+                            case '30':
+                                name = '30 days price history';
+                                break;
+                            case '90':
+                                name = '90 days price history';
+                                break;
+                            case '365':
+                                name = '365 days price history';
+                                break;
+                            case 'all':
+                                name = 'All time price history';
+                                break;
+                            default:
+                                name = 'All time price history';
+                                break;
+                        }
+                        if (res.data.status) {
+                            this.Price_DaysChartseries = [{
+                                name: name,
+                                data: res.data.chart
+                            }];
+                         this.chartType= 'cp';
+
+                        }
+                    })
+          
+                }
+                 },
+            loadMCHistoryChart(type,lev) {
+                if(this.coindata.coingeckoid != null)
+                {
+                axios.post('https://moonsniper.co/api/load-mc-chart-by-coin', {
+                        coingickoid: this.coindata.coingeckoid ? this.coindata.coingeckoid : 1,
+                        type: type,
+                    })
+                    .then(res => {
+                        let name = '24 hours market cap history'
+                        switch (type) {
+                            case '24':
+                                name = '24 hours market cap history';
+                                break;
+                            case '7':
+                                name = '7 days market cap history';
+                                break;
+                            case '14':
+                                name = '14 days market cap history';
+                                break;
+                            case '30':
+                                name = '30 days market cap history';
+                                break;
+                            case '90':
+                                name = '90 days market cap history';
+                                break;
+                            case '365':
+                                name = '365 days market cap history';
+                                break;
+                            case 'all':
+                                name = 'All time market cap history';
+                                break;
+                            default:
+                                name = 'All time history';
+                                break;
+                        }
+                        if (res.data.status) {
+                            this.MC_DaysChartseries = [{
+                                name: name,
+                                data: res.data.chart
+                            }];
+                            if(lev !=1)
+                            {
+                            this.chartType= 'mc';
+
+                            }
+                        }
+                    })
+                }
+                },
             toInterNationalNumber(val) {
                 if (val)
                     return new Intl.NumberFormat('en-US', {
@@ -2533,6 +2775,18 @@
     }
     .Contract-div #dropdown-left1{
         padding:0 !important;
+    }
+    .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+        color: #495057;
+        background-color: #fff;
+        border-color: white !important;
+        border-bottom: solid 1px !important;
+    }
+   .accordion-body .nav>li.nav-item:hover {
+        background-color: transparent;
+    }
+    .nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover{
+        border: none;
     }
     @font-face {
         font-family: "Poppins-Light" !important;
