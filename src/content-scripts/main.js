@@ -24,6 +24,21 @@ option.classList = "table-td-moon"
 var domain = window.location.href;
 let featureBoxRight = [];
 if (domain.includes("coingecko.com")) {
+  if(domain.includes("coingecko.com/en/coins"))
+  {
+    featureBoxRight = document.querySelectorAll('[data-controller="coins-information"]');
+    let el1 = featureBoxRight[0].querySelectorAll('div div div:nth-child(2)')[1];
+    let el2 = featureBoxRight[0].querySelectorAll('div div div:nth-child(2)')[0];
+    option.innerHTML = '<span ><img style=" width:40px; cursor: pointer;" class="moon-logo" src="https://moonsniper.co/images/moon/icon/fullcolor.png"></span>';
+    option.setAttribute("style", "width: 53px; ")
+    el2.prepend(option.cloneNode(true));
+    let ab = el1.innerHTML.trim();
+    var symbol =ab.match(/\(([^)]+)\)/)[1];
+    var specificMoon = el2.getElementsByTagName("span")[0];
+
+    specificMoon.addEventListener('click', triggerPopupSingleCoin, false);
+    specificMoon.symbol = symbol;
+  }else{
   featureBoxRight = document.querySelectorAll('div.coin-table tbody tr');
   if (featureBoxRight) {
     for (let i = 0; i < featureBoxRight.length; i++) {
@@ -42,6 +57,7 @@ if (domain.includes("coingecko.com")) {
       specificMoon.symbol = symbol;
     }
   }
+}
 } else if (domain.includes("coinmarketcap.com")) {
   var thHtml = document.createElement("th");
   thHtml.classList = "table-th-moon stickyTop";
@@ -124,9 +140,7 @@ if (domain.includes("coingecko.com")) {
 
 }
 
-
-
-
+// coingecko.com/en/coins/ethereum  
 const body = document.querySelector('body');
 
 if (body) {
@@ -146,6 +160,19 @@ if (body) {
 
 
 function triggerPopup(event) {
+  event.stopPropagation()
+  console.log("popup triggered with symbol: " + event.currentTarget.symbol);
+  vm.visible = !vm.visible;
+  if (event.currentTarget.symbol) {
+    vm.coin = event.currentTarget.symbol;
+  }
+
+
+  /* let tdNode = event.target.parentNode.parentNode.parentNode;
+  let ReqTd = tdNode.querySelector('.cg-sticky-third-col');
+  document.querySelector(".modal").classList.add("show"); */
+}
+function triggerPopupSingleCoin(event) {
   event.stopPropagation()
   console.log("popup triggered with symbol: " + event.currentTarget.symbol);
   vm.visible = !vm.visible;
