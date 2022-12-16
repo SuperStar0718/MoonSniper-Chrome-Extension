@@ -2690,9 +2690,9 @@
         overflow: hidden;
         font-family: 'Poppins-Light';
         font-style: normal;
-        font-weight: 400;
-        font-size: 20px;
-        height: 33px;
+        font-weight: 600;
+        font-size: 30px;
+        height: 34px;
         color: #fff;
     }
 
