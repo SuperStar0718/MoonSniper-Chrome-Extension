@@ -1093,7 +1093,7 @@
                                         <span class="mr-1">Supply chart: </span>
                                         <div>
 
-                                            <vue-apex-charts type="pie" height="300" :options="supplyChart.chartOptions"
+                                            <vue-apex-charts type="donut" height="300" :options="supplyChart.chartOptions"
                                                 :series="supplyChart.series" />
                                         </div>
                                     </b-col>
