@@ -32,12 +32,13 @@
             "js": ["content-scripts/main.js"],
             "all_frames": true
         }
+        
     ],
     "permissions": [
         "declarativeNetRequest",
         "tabs",
         "activeTab",
-        "scripting"
+        "scripting","storage", "alarms"
     ]
 
 }

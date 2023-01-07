@@ -29,6 +29,7 @@ window.onload = async () => {
     function handleLoad() {
         iframe.style.display = "block";
         document.querySelector("#loading-wrapper").remove();
-    }
-  };
+    }   
   
+
+  };

@@ -248,10 +248,15 @@ function triggerPopup3(event) {
   }
 
 }
-//////////////////////////////////////
+
 
 chrome.runtime.onMessage.addListener(message => {
   if (message.toggleVisible) {
     vm.visible = !vm.visible;
   }
 });
+
+
+
+
+ 
