@@ -76,7 +76,7 @@
         <div class="cancel-button cursor-pointer  bg-gray-400  rounded-sm" @click="closePopup2">X</div>
         <!-- <pre>{{ currentTab }}</pre> -->
 
-        <iframe src="https://moonsniper.co/dashboard" title="W3Schools Free Online Web Tutorials"></iframe>
+        <iframe v-if="visible2" src="https://moonsniper.co/dashboard" title="W3Schools Free Online Web Tutorials"></iframe>
       </div>
     </div>
   </div>

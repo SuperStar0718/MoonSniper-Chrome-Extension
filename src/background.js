@@ -72,7 +72,7 @@ chrome.runtime.onInstalled.addListener(() => {
   });
 });
 let token = '';
-let BASE_URL = 'http://localhost:8000/';
+let BASE_URL = 'https://moonsniper.co/';
 chrome.alarms.onAlarm.addListener(function (alarm) {
   if (alarm.name === "remindme") {
     callNotification();

@@ -30,7 +30,7 @@ function doToggleAlarm() {
  
 }
 let token = '';
-let BASE_URL = 'http://localhost:8000/';
+let BASE_URL = 'https://moonsniper.co/';
 function allowAlarmForUser(){
   
     chrome.cookies.getAll({
