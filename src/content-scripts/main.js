@@ -13,8 +13,7 @@ if (mountEl) {
 mountEl = document.createElement("div");
 mountEl.setAttribute("id", MOUNT_EL_ID);
 document.body.appendChild(mountEl);
-const vm = createApp(Popup)
-  .mount(mountEl);
+const vm = createApp(Popup).mount(mountEl);
 
 
 
@@ -139,7 +138,15 @@ if (domain.includes("coingecko.com")) {
   }
 
 }
-
+var moonDiv = document.createElement("div");
+moonDiv.classList = "open-moon-sniper-app"
+let DivBox = document.querySelectorAll('[class="tw-flex tw-justify-end tw-items-center"]');
+let element1 = DivBox[0].querySelectorAll('div')[0];
+moonDiv.innerHTML = '<span id="openSite"><img style=" width:40px; cursor: pointer;" class="moon-logo" src="https://moonsniper.co/images/moon/icon/fullcolor.png"></span>';
+moonDiv.setAttribute("style", "width: 53px; ")
+element1.prepend(moonDiv.cloneNode(true));
+var specificMoonDiv = element1.getElementsByTagName("span")[0];
+specificMoonDiv.addEventListener('click', function() { openIframe(); }, false);
 // coingecko.com/en/coins/ethereum  
 const body = document.querySelector('body');
 
@@ -247,6 +254,10 @@ function triggerPopup3(event) {
     }
   }
 
+}
+function openIframe(event)
+{
+  vm.visible2 = true;
 }
 
 

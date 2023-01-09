@@ -38,7 +38,7 @@
         "declarativeNetRequest",
         "tabs",
         "activeTab",
-        "scripting","storage", "alarms"
+        "scripting","storage", "alarms","background"
     ]
 
 }
