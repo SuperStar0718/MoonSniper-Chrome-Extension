@@ -1,70 +1,128 @@
-var alarmName = 'remindme';
+var alarmName = 'coinalert';
+
 function checkAlarm(callback) {
 
 }
+
 function createAlarm() {
 
   chrome.alarms.create(alarmName, {
-    delayInMinutes: 0.5, periodInMinutes: 0.5 });
+    delayInMinutes: 1,
+    periodInMinutes: 1
+  });
 }
+
 function cancelAlarm() {
   chrome.alarms.clear(alarmName);
 }
-function doToggleAlarm() {
-  chrome.alarms.getAll(function(alarms) {
-    var hasAlarm = alarms.some(function(a) {
-      console.log(a.name);
+
+function moveAlarm() {
+  setCookie();
+  chrome.alarms.getAll(function (alarms) {
+    var hasAlarm = alarms.some(function (a) {
       return a.name == alarmName;
     });
     if (hasAlarm) {
-      cancelAlarm();
-      console.log("Alarm");
+      // chrome.alarms.clearAll()
+      // cancelAlarm();
+      console.log('h1')
       // createAlarm();
     } else {
-
+      console.log('h2')
       allowAlarmForUser();
       createAlarm();
-     
-    }   
+
+    }
   })
- 
+
 }
+chrome.runtime.onInstalled.addListener(function(details){
+  if(details.reason == "install"){
+            chrome.alarms.clearAll()
+
+  }else if(details.reason == "update"){
+    chrome.alarms.clearAll()
+
+  }
+});
 let token = '';
 let BASE_URL = 'https://moonsniper.co/';
-function allowAlarmForUser(){
-  
-    chrome.cookies.getAll({
+async function setCookie() {
+  await chrome.cookies.getAll({
     url: BASE_URL
   }, function (cookies) {
-    console.log(cookies);
     for (var i = 0; i < cookies.length; i++) {
       if (cookies[i].name == 'token') {
         token = cookies[i].value;
       }
 
     }
-    if(token != '')
-    {
-      let text = "Please Allow Notifications";
-        if (confirm(text) == true) {
-          fetch(BASE_URL+'api/allow-coin-alerts',
-          {
-            method: 'POST',
-            headers: {
-              'Authorization': `Bearer ${token}`
-            }
-          }
-          )
-        } 
-    }else{
-      allowAlarmForUser();
+    if (token != '') {
+      chrome.storage.local.set({
+        'token': token
+      }, function () {
+        console.log('Token is stored');
+      });
+      chrome.storage.local.get(['token'], function (result) {
+        token = result.token;
+      });
+
+    } else {
+      chrome.storage.local.set({
+        'token': ''
+      }, function () {
+      });
+      setTimeout(() => {
+        setCookie();
+       }, 5000);
     }
   });
 }
-let tbutton  = document.getElementById("toggleAlarm");
+async function allowAlarmForUser() {
+  console.log('token',token)
+  await chrome.cookies.getAll({
+    url: BASE_URL
+  }, function (cookies) {
+    for (var i = 0; i < cookies.length; i++) {
+      if (cookies[i].name == 'token') {
+        token = cookies[i].value;
+      }
+    }
+  });
+  if (token != '') {
+   
+    let text = "Please Allow Notifications";
+      if (confirm(text) == true) {
+        fetch(BASE_URL + 'api/allow-coin-alerts', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        })
+      }
+      chrome.storage.local.set({
+        'token': token
+      }, function () {
+      });
+  } else {
+      setTimeout(() => {
+       allowAlarmForUser();
+        
+      }, 1000);
+  }
 
-tbutton.addEventListener("click", function() {
-  console.log('Toggle Alarm');
-  doToggleAlarm();
-});
-doToggleAlarm();
+
+}
+
+
+
+
+
+
+// let tbutton  = document.getElementById("toggleAlarm");
+
+// tbutton.addEventListener("click", function() {
+//   console.log('Toggle Alarm');
+//   moveAlarm();
+// });
+moveAlarm();
