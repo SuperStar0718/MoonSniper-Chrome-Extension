@@ -26,7 +26,7 @@ if (domain.includes("coingecko.com")) {
   if(domain.includes("coingecko.com/en/coins"))
   {
     featureBoxRight = document.querySelectorAll('[data-controller="coins-information"]');
-    let el1 = featureBoxRight[0].querySelectorAll('div div div:nth-child(2)')[1];
+    let el1 = featureBoxRight[0].querySelectorAll('div div div:nth-child(2)')[0];
     let el2 = featureBoxRight[0].querySelectorAll('div div div:nth-child(2)')[0];
     option.innerHTML = '<span ><img style=" width:40px; cursor: pointer;" class="moon-logo" src="https://moonsniper.co/images/moon/icon/fullcolor.png"></span>';
     option.setAttribute("style", "width: 53px; ")
