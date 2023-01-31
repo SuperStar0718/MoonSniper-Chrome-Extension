@@ -1816,20 +1816,26 @@
                     this.coindata.three_months_unlock_number_of_tokens != null && this
                     .coindata
                     .six_months_unlock_number_of_tokens != null) {
-                    var ms = parseFloat(this.coindata.max_supply);
-                    if (isNaN(ms))
-                        ms = 0.0;
-                    var cs = parseFloat(this.coindata.circulating_supply);
-                    if (isNaN(cs))
-                        cs = 0.0;
+                        var total_locked = parseFloat(this.coindata.total_locked != null ? this.coindata
+                                .total_locked : 0);
+                            var ms = parseFloat(this.coindata.max_supply ? this.coindata.max_supply : this
+                                .coindata.total_supply);
+                            if (isNaN(ms))
+                                ms = 0.0;
+                            var cs = parseFloat(this.coindata.circulating_supply);
+                            if (isNaN(cs))
+                                cs = 0.0;
+                            var nt = parseFloat(this.coindata.next_unlock_number_of_tokens != null ? this
+                                .coindata.next_unlock_number_of_tokens : 0);
+                            if (isNaN(nt)) {
+                                nt = 0.0;
+                            }
+                            console.log(ms, nt, total_locked);
+                            var val1 = Math.max(((total_locked / ms) * 100), 0.0);
+                            var val2 = nt / ms * 100;
+                            var val3 = Math.max((100 - val1 - val2), 0.0);
 
-                    var nt = parseFloat(this.coindata.next_unlock_number_of_tokens);
-                    if (isNaN(nt))
-                        nt = 0.0;
-                    var val1 = Math.max(ms - cs - nt, 0.0);
-                    var val2 = cs;
-                    var val3 = nt;
-                    this.supplyChart.series = [val1, val2, val3];
+                            this.supplyChart.series = [val1, val3, val2];
 
                 }
 

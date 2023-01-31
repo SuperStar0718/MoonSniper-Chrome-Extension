@@ -17,7 +17,7 @@ async function getCurrentTab() {
   console.log({
     tab
   });
-  return tab;
+  return tab; 
 }
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
