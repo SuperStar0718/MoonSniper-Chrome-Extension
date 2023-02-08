@@ -81,6 +81,7 @@
     } from 'bootstrap-vue-3'
     import axios from 'axios'
     import fieldsData from './fields'
+    import BASE_URL_i from '../../base_url.js'
     export default {
         components: {
             BTable,
@@ -100,6 +101,7 @@
                 pageNumber:1,
                 isBusy:false,
                 fields: fieldsData,
+                BASE_URL:BASE_URL_i,
           
 
             }
@@ -108,7 +110,7 @@
             loadExchanges() {
                 this.exchangesLoaded= false;
                 this.isBusy = true;
-                axios.post('https://moonsniper.co/api/exchanges-by-token-extension?token='+this.token.symbol+'&page=' + this.pageNumber).then(res => {
+                axios.post(''+this.BASE_URL+'api/exchanges-by-token-extension?token='+this.token.symbol+'&page=' + this.pageNumber).then(res => {
                     if (res.data.status == true) {
                         this.exchangeData = res.data.exchanges;
                         this.exchangesLoaded= true;

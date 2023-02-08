@@ -9,8 +9,6 @@
                                             font-weight: 300;
                                             font-size: 12px;
                                             ">Rank #{{toInterNationalNumber(coindata.market_cap_rank)}}
-
-
                         </div>
                         <div class="d-flex" style="margin-top:11px;">
                             <div class="d-flex m-auto">
@@ -114,7 +112,7 @@
                                             :key="index" style="display:block; padding: 2px; border-radius: 20px;">
                                             <div class="flex">
 
-                                                <b-img v-if="coindata.image" :src="coindata.image" fluid
+                                                <b-avatar v-if="coindata.image" :src="`${BASE_URL}storage/contracts/`+address.platform+'.png'" fluid
                                                     alt="Responsive image" style="margin-right:5px;
                                                      height:36px;   
                                                       position: relative;
@@ -150,7 +148,7 @@
                                                         <!-- <feather-icon icon="CopyIcon"
                                                                             class="cursor-pointer darkWhiteText" size="20" /> -->
                                                     </b-button>
-                                                    <img src='https://moonsniper.co/images/static/metamask.png'
+                                                    <img :src="`${BASE_URL}images/static/metamask.png`"
                                                         class="img-fluid" alt="metamask" style="cursor:pointer; width:23px; margin-right:13px;
                                                         height: fit-content;
                                                         margin-top: auto;
@@ -174,7 +172,7 @@
                                         <div class="darkBackgroundBlack"
                                             v-for="(address,index) in coindata.contract_address" :key="index"
                                             style="display:flex; padding: 4px;">
-                                            <b-img v-if="coindata.image" :src="coindata.image" fluid
+                                            <b-avatar v-if="coindata.image" :src="`${BASE_URL}storage/contracts/`+address.platform+'.png'" fluid
                                                 alt="Responsive image" style="margin-right:5px; height:36px;" />
                                             <div class="" style="font-family: 'Poppins-Light'; display:inline-block; font-style: normal;
                                                                         font-weight: 500;
@@ -205,7 +203,7 @@
                                                         <font-awesome-icon icon="fa-regular fa-copy" />
                                                     </i>
                                                 </b-button>
-                                                <img src='https://moonsniper.co/images/static/metamask.png'
+                                                <img :src="`${BASE_URL}images/static/metamask.png`"
                                                     class="img-fluid" alt="metamask" style="cursor:pointer; width:23px;"
                                                     @click="say('hello')">
 
@@ -393,7 +391,7 @@
                                             style="max-width:200px;">
                                             <a :href="coindata.website" target="_blank" class="d-block"
                                                 style="margin-top:20px; margin-bottom:10px;">
-                                                <b-img rounded :src="'https://moonsniper.co/images/static/website.png'"
+                                                <b-img rounded :src="`${BASE_URL}images/static/website.png`"
                                                     fluid class="w-50 mx-auto" alt="Responsive image" />
                                             </a>
                                             <div class="soicalLable soicalLable-2">
@@ -407,7 +405,7 @@
                                             style="max-width:200px;">
                                             <a :href="coindata.twitter" target="_blank" class="d-block"
                                                 style="margin-top:20px; margin-bottom:10px;">
-                                                <b-img rounded :src="'https://moonsniper.co/images/static/twitter.png'"
+                                                <b-img rounded :src="`${BASE_URL}images/static/twitter.png`"
                                                     fluid class="w-50 mx-auto" alt="Responsive image" />
                                             </a>
                                             <div class="soicalLable soicalLable-2" v-if="coindata.twitter_followers">
@@ -425,7 +423,7 @@
                                             style="max-width:200px;">
                                             <a :href="coindata.telegram" target="_blank" class="d-block"
                                                 style="margin-top:20px; margin-bottom:10px;">
-                                                <b-img rounded :src="'https://moonsniper.co/images/static/telegram.png'"
+                                                <b-img rounded :src="`${BASE_URL}images/static/telegram.png`"
                                                     fluid class="w-50 mx-auto" alt="Responsive image" />
 
                                             </a>
@@ -443,7 +441,7 @@
                                             style="max-width:200px;">
                                             <a :href="coindata.discord" target="_blank" class="d-block"
                                                 style="margin-top:20px; margin-bottom:10px;">
-                                                <b-img rounded :src="'https://moonsniper.co/images/static/discord.png'"
+                                                <b-img rounded :src="`${BASE_URL}images/static/discord.png`"
                                                     fluid class="w-50 mx-auto" alt="Responsive image" />
                                             </a>
                                             <div class="soicalLable soicalLable-2" v-if="coindata.medium_followers">
@@ -459,7 +457,7 @@
                                             style="max-width:200px;">
                                             <a :href="coindata.medium" target="_blank" class="d-block"
                                                 style="margin-top:20px; margin-bottom:10px;">
-                                                <b-img rounded :src="'https://moonsniper.co/images/static/medium.png'"
+                                                <b-img rounded :src="`${BASE_URL}images/static/medium.png`"
                                                     fluid class="w-50 mx-auto" alt="Responsive image" />
 
                                             </a>
@@ -476,7 +474,7 @@
                                             style="max-width:200px;">
                                             <a :href="coindata.reddit" target="_blank" class="d-block"
                                                 style="margin-top:20px; margin-bottom:10px;">
-                                                <b-img rounded :src="'https://moonsniper.co/images/static/reddit.png'"
+                                                <b-img rounded :src="`${BASE_URL}images/static/reddit.png`"
                                                     fluid class="w-50 mx-auto" alt="Responsive image" />
 
                                             </a>
@@ -495,7 +493,7 @@
                                             <a :href="coindata.whitepaper" target="_blank" class="d-block"
                                                 style="margin-top:20px; margin-bottom:10px;">
                                                 <b-img rounded
-                                                    :src="'https://moonsniper.co/images/static/whitepaper.png'" fluid
+                                                    :src="`${BASE_URL}images/static/whitepaper.png`" fluid
                                                     class="w-50 mx-auto bg-light" alt="Responsive image" />
 
                                             </a>
@@ -512,7 +510,7 @@
                                             style="max-width:200px;">
                                             <a :href="coindata.github" target="_blank" class="d-block"
                                                 style="margin-top:20px; margin-bottom:10px;">
-                                                <b-img rounded :src="'https://moonsniper.co/images/static/github.png'"
+                                                <b-img rounded :src="`${BASE_URL}images/static/github.png`"
                                                     fluid class="w-50 mx-auto" alt="Responsive image" />
                                             </a>
                                             <div class="soicalLable soicalLable-2" v-if="coindata.github_followers">
@@ -1141,7 +1139,7 @@
     import {
         FontAwesomeIcon
     } from '@fortawesome/vue-fontawesome'
-
+    import BASE_URL_i from '../../base_url.js'
     /* import specific icons */
 
     import axios from 'axios'
@@ -1255,6 +1253,7 @@
                 timerOutput: [],
                 coindata: [],
                 dataloaded: false,
+                BASE_URL:BASE_URL_i,
                 supplyChart: {
                     series: [],
 
@@ -1785,7 +1784,7 @@
             loadCoins() {
                 this.selectedContract = null;
                 this.dataloaded = false
-                axios.post(`https://moonsniper.co/api/extension-coin-data-coingecko?coin=${this.coin}`)
+                axios.post(`${this.BASE_URL}api/extension-coin-data-coingecko?coin=${this.coin}`)
                     .then(res => {
                         if (res.data.status == true) {
                             this.coindata = res.data.coin;
@@ -1842,7 +1841,7 @@
             },
             loadTradeHystory() {
                 this.TradeHistoryOptions.xaxis.categories = [];
-                axios.post(`https://moonsniper.co/api/get_trading_volume_history-extension`, {
+                axios.post(`${this.BASE_URL}api/get_trading_volume_history-extension`, {
                         coin_id: this.coindata.coin_id,
                         symbol: this.coindata.symbol
                     })
@@ -1920,7 +1919,7 @@
 
                 if(this.coindata.coingeckoid != null)
                 {
-                    axios.post('https://moonsniper.co/api/load-price-chart-by-coin', {
+                    axios.post(`${this.BASE_URL}api/load-price-chart-by-coin`, {
                         coingickoid: this.coindata.coingeckoid ? this.coindata.coingeckoid : 1,
                         type: type,
                     })
@@ -1967,7 +1966,7 @@
             loadMCHistoryChart(type,lev) {
                 if(this.coindata.coingeckoid != null)
                 {
-                axios.post('https://moonsniper.co/api/load-mc-chart-by-coin', {
+                axios.post(`${this.BASE_URL}api/load-mc-chart-by-coin`, {
                         coingickoid: this.coindata.coingeckoid ? this.coindata.coingeckoid : 1,
                         type: type,
                     })

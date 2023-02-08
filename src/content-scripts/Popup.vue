@@ -8,6 +8,8 @@
   } from "vue";
   import axios from "axios";
   import PopupContent from './PopupContent.vue';
+  import BASE_URL_i from '../../base_url.js'
+
   // import {
   //       BAlert
   //     } from 'bootstrap-vue'
@@ -20,6 +22,7 @@
       const visible2 = ref(false);
       const coin = ref('');
       const data = ref(null);
+      const BASE_URL = ref(BASE_URL_i);
       const closePopup = () => {
         visible.value = false;
         coin.value = ''
@@ -28,7 +31,7 @@
         visible2.value = false;
       }
       const loadCoinById = (id) => {
-        axios.post(`https://moonsniper.co/api/extension-coin-data-coingecko?coin=${id}`)
+        axios.post(`${BASE_URL.value}api/extension-coin-data-coingecko?coin=${id}`)
           .then(res => {
             data.value = res.data
           })
@@ -53,7 +56,7 @@
         data,
         closePopup,
         closePopup2,
-        loadCoinById,
+        loadCoinById,BASE_URL,
         ...toRefs(state)
       };
     },
@@ -76,7 +79,7 @@
         <div class="cancel-button cursor-pointer  bg-gray-400  rounded-sm" @click="closePopup2">X</div>
         <!-- <pre>{{ currentTab }}</pre> -->
 
-        <iframe v-if="visible2" src="https://moonsniper.co/dashboard" title="W3Schools Free Online Web Tutorials"></iframe>
+        <iframe v-if="visible2" :src="`${BASE_URL}dashboard`" title="W3Schools Free Online Web Tutorials"></iframe>
       </div>
     </div>
   </div>

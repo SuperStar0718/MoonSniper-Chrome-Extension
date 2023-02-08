@@ -1,4 +1,4 @@
-
+import BASE_URL from "../../base_url";
 window.onload = async () => {
     var iframe = document.createElement("iframe");
     var loader = chrome.runtime.getURL("popup/loading.gif");
@@ -6,7 +6,7 @@ window.onload = async () => {
     iframe.style.height = "100%";
     iframe.style.width = "100%";
     iframe.setAttribute("allow", "");
-    iframe.src = "https://moonsniper.co/dashboard?type=extension";
+    iframe.src = `${BASE_URL}dashboard?type=extension`;
     iframe.id = "moonsniper-iframe";
     var loading = document.createElement("span");
     loading.id = "loading-wrapper";

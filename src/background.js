@@ -1,5 +1,5 @@
 // import axios from "axios";
-
+import BASE_URL from "../base_url";
 
 chrome.action.onClicked.addListener(async tab => {
   if (tab.id) {
@@ -73,7 +73,6 @@ chrome.runtime.onInstalled.addListener(() => {
   });
 });
 let tokenId = '';
-let BASE_URL = 'https://moonsniper.co/';
 chrome.alarms.onAlarm.addListener(function (alarm) {
   if (alarm.name === "coinalert") {
     callNotification();

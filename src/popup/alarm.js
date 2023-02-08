@@ -1,3 +1,4 @@
+import BASE_URL  from "../../base_url";
 var alarmName = 'coinalert';
 
 function checkAlarm(callback) {
@@ -46,7 +47,7 @@ chrome.runtime.onInstalled.addListener(function(details){
   }
 });
 let token = '';
-let BASE_URL = 'https://moonsniper.co/';
+
 async function setCookie() {
   await chrome.cookies.getAll({
     url: BASE_URL
