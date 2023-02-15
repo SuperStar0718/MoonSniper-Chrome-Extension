@@ -39,6 +39,11 @@ if (domain.includes("coingecko.com")) {
     specificMoon.addEventListener('click', triggerPopupSingleCoin, false);
     specificMoon.symbol = symbol;
   }else{
+    const elementToDuplicate = document.querySelector('.cg-sticky-col-header');
+// Create a new element that is a copy of the original element
+    const duplicatedElement = elementToDuplicate.cloneNode(true);
+    // Append the new element to the same parent element as the original element
+    elementToDuplicate.parentNode.insertBefore(duplicatedElement, elementToDuplicate.parentNode.firstChild);
   featureBoxRight = document.querySelectorAll('div.coin-table tbody tr');
   if (featureBoxRight) {
     for (let i = 0; i < featureBoxRight.length; i++) {
@@ -144,7 +149,7 @@ moonDiv.classList = "open-moon-sniper-app"
 let DivBox = document.querySelectorAll('[class="tw-flex tw-justify-end tw-items-center"]');
 let element1 = DivBox[0].querySelectorAll('div')[0];
 moonDiv.innerHTML = '<span id="openSite"><img style=" width:40px; cursor: pointer;" class="moon-logo" src="'+BASE_URL+'images/moon/icon/fullcolor.png"></span>';
-moonDiv.setAttribute("style", "width: 53px; ")
+moonDiv.setAttribute("style", "width: 53px; display: none")
 element1.prepend(moonDiv.cloneNode(true));
 var specificMoonDiv = element1.getElementsByTagName("span")[0];
 specificMoonDiv.addEventListener('click', function() { openIframe(); }, false);
