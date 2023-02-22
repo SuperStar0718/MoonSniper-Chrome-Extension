@@ -8,8 +8,8 @@ function checkAlarm(callback) {
 function createAlarm() {
 
   chrome.alarms.create(alarmName, {
-    delayInMinutes: 1,
-    periodInMinutes: 1
+    delayInMinutes: 0.0833333333,
+    periodInMinutes: 0.0833333333
   });
 }
 
@@ -42,6 +42,7 @@ chrome.runtime.onInstalled.addListener(function(details){
             chrome.alarms.clearAll()
 
   }else if(details.reason == "update"){
+    console.log('installed');
     chrome.alarms.clearAll()
 
   }
