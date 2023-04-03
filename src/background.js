@@ -19,12 +19,26 @@ async function getCurrentTab() {
   });
   return tab; 
 }
-
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+let coins = {};
+chrome.runtime.onMessage.addListener( (request, sender, sendResponse) => {
   switch (request.type) {
     case "POPUP_INIT":
       getCurrentTab().then(sendResponse);
       return true;
+      case "getLivePrice":
+        console.log('called getLivePrice');
+         fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${request.coinsStr}&vs_currencies=USD`, {
+          method: 'GET',
+        })
+        .then(response => response.json())
+        .then(response => {
+          console.log(response);
+          coins = response;
+           sendResponse({ message:coins});
+        });
+        // sendResponse({ message:'coins'});
+
+        return true;
     default:
       break;
   }
@@ -83,6 +97,7 @@ chrome.alarms.onAlarm.addListener(function (alarm) {
 });
 
 async function callNotification() { 
+  return 0;
    chrome.storage.local.get(['token'], function(result) {
   tokenId = result.token;
 

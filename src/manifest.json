@@ -32,6 +32,11 @@
             "matches": ["https://www.coingecko.com/*","https://coinmarketcap.com/*","https://dexscreener.com/*","https://www.coinbase.com/*"],
             "js": ["content-scripts/main.js"],
             "all_frames": true
+        },
+        {
+            "matches": ["http://localhost:8000/*","https://moonsniper.co/*"],
+            "js": ["content-scripts/moon.js"],
+            "all_frames": true
         }
         
     ],
