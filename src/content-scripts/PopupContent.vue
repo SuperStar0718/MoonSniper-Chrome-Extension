@@ -244,12 +244,13 @@
                                     ||coindata.total_supply_percent" :isVisible="true" title="Market Data"
                         class="open w-100">
                         <b-card class="p-0 my-0">
-                            <b-card-body class="inner-cbody pt-0" style="margin-left: 10px; margin-top: 8px;">
+                            <b-card-body class="inner-cbody pt-0" style="margin-top: 6px;">
                                 <b-row>
-                                    <b-col md="10" sm="8" class="text-center sparlineChat mb-1"
+                                    <TradingViewChart :symbol=coindata.symbol />
+                                    <!-- <b-col md="10" sm="8" class="text-center sparlineChat mb-1"
                                         style="margin-left: -40px;"
-                                        v-if="coindata.sparkline_in_7d&& coindata.sparkline_in_7d.length>0">
-                                        <TradingViewChart :symbol=coindata.symbol />
+                                        v-if="coindata.sparkline_in_7d&& coindata.sparkline_in_7d.length>0"> -->
+
                                         <!-- <h5> 7 Days</h5> -->
                                         <!-- <div class="position-absolute w-100 d-flex justify-content-between"
                                             style="z-index:99">
@@ -316,8 +317,8 @@
                                                             :limit="coindata.sparkline_in_7d?coindata.sparkline_in_7d.length:1000"
                                                             :styles="spLineStyles" />
                                                     </sparkline> -->
-                                    </b-col>
-                                    <b-col md="2" sm="4" style=" 
+                                    <!-- </b-col> -->
+                                    <!-- <b-col md="2" sm="4" style=" 
                                                     padding-left: 0px !important;
                                                     justify-content: space-between;
                                                     flex-direction: column;">
@@ -366,7 +367,7 @@
                                             <button class="fs-6 " style="font-size: 12px !important;">Price
                                                 Prediction</button>
                                         </div>
-                                    </b-col>
+                                    </b-col> -->
 
                                 </b-row>
                                 <b-row>
