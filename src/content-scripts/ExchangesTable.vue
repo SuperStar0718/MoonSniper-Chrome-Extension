@@ -87,9 +87,9 @@
             BTable,
             BOverlay,
             BTabs,
-        BTab,
-        BFormCheckbox,
-        BRow,BCol,BPagination
+            BTab,
+            BFormCheckbox,
+            BRow,BCol,BPagination
         },
         props:{
             token:Object
