@@ -243,15 +243,15 @@
                                     ||coindata.market_cap
                                     ||coindata.total_supply_percent" :isVisible="true" title="Market Data"
                         class="open w-100">
-                        <b-card class="p-0">
-                            <b-card-body class="inner-cbody" style="margin-left: 10px; margin-top: 19px;">
+                        <b-card class="p-0 my-0">
+                            <b-card-body class="inner-cbody pt-0" style="margin-left: 10px; margin-top: 8px;">
                                 <b-row>
-
                                     <b-col md="10" sm="8" class="text-center sparlineChat mb-1"
                                         style="margin-left: -40px;"
                                         v-if="coindata.sparkline_in_7d&& coindata.sparkline_in_7d.length>0">
+                                        <TradingViewChart :symbol=coindata.symbol />
                                         <!-- <h5> 7 Days</h5> -->
-                                        <div class="position-absolute w-100 d-flex justify-content-between"
+                                        <!-- <div class="position-absolute w-100 d-flex justify-content-between"
                                             style="z-index:99">
 
                                             <b-tabs content-class="" class="graph_tab graph_tab-1 float-left w-50"
@@ -291,7 +291,7 @@
                                                     </b-tab>
                                                  </b-tabs>
                                                 <div style="width:20px">
-                                                    <!-- <feather-icon size='12' icon='CalendarIcon' /> -->
+                                                    <feather-icon size='12' icon='CalendarIcon' />
                                                 </div>
                                             </div>
                                         </div>
@@ -310,7 +310,7 @@
                                                     :options="MC_DaysChart" :series="MC_DaysChartseries">
                                                 </vue-apex-charts>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <!-- <sparkline width="300" height="150">
                                                         <sparklineLine :data="coindata.sparkline_in_7d"
                                                             :limit="coindata.sparkline_in_7d?coindata.sparkline_in_7d.length:1000"
@@ -1144,6 +1144,7 @@
 
     import axios from 'axios'
     import VueApexCharts from "vue3-apexcharts";
+    import TradingViewChart from './TradingViewChart.vue';
     import ExchangesTable from './ExchangesTable.vue'
     import BootstrapVue3, {
         BTable,
@@ -1218,7 +1219,7 @@
             BCardHeader,
             BCardBody,
             BModal,
-
+            TradingViewChart,
             BDropdown,
             BDropdownItem,
             BDropdownForm,

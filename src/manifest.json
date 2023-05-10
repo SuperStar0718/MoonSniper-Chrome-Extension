@@ -30,6 +30,10 @@
     "content_scripts": [
         {
             "matches": ["https://www.coingecko.com/*","https://coinmarketcap.com/*","https://dexscreener.com/*","https://www.coinbase.com/*"],
+            "js": ["content-scripts/tv.js"]
+        },
+        {
+            "matches": ["https://www.coingecko.com/*","https://coinmarketcap.com/*","https://dexscreener.com/*","https://www.coinbase.com/*"],
             "js": ["content-scripts/main.js"],
             "all_frames": true
         },

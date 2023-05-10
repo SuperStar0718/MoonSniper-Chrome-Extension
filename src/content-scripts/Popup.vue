@@ -31,6 +31,7 @@
         visible2.value = false;
       }
       const loadCoinById = (id) => {
+        console.log("===========================", BASE_URL.value)
         axios.post(`${BASE_URL.value}api/extension-coin-data-coingecko?coin=${id}`)
           .then(res => {
             data.value = res.data
