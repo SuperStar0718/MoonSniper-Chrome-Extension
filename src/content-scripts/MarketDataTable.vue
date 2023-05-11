@@ -2,7 +2,7 @@
     <div>
       <b-row class="w-100 m-auto">
         <b-col v-for="(item, index) in tempData" :key="index" cols="6" md="3" class="border-col">
-          <h3 class="text-center font-weight-bold market-value">
+          <h3 class="text-center font-weight-bold market-value" :class="{ 'text-success': (item.compare===true), 'text-danger': (item.compare===false) }">
             {{ item.value }}
           </h3>
           <h6 class="text-center market-caption">
@@ -25,6 +25,12 @@
 
 .market-caption {
     font-size: 0.8rem;
+}
+.text-success {
+    color: rgb(132 204 22);
+}
+.text-danger{
+    color: rgb(220 38 38);
 }
 </style>
 
@@ -49,12 +55,20 @@ export default {
         },
         roundData(val) {
             if (val) {
-                return this.toInterNationalNumber(parseFloat(val).toFixed(2));
+                return this.toInterNationalNumber(parseFloat(val).toFixed(0));
             }
         },
-        kFormatter(num) {
-            return Math.abs(num) > 999 ? Math.sign(num) * ((Math.abs(num) / 1000).toFixed(1)) + 'k' : Math.sign(num) * Math.abs(num)
-        },
+        nFormatter(num) {
+            if (Math.abs(num) > 999999999) {
+                return Math.sign(num)*((Math.abs(num)/1000000000).toFixed(1)) + 'B';
+            } else if (Math.abs(num) > 999999) {
+                return Math.sign(num)*((Math.abs(num)/1000000).toFixed(1)) + 'M';
+            } else if (Math.abs(num) > 999) {
+                return Math.sign(num)*((Math.abs(num)/1000).toFixed(1)) + 'K';
+            } else {
+                return Math.sign(num)*Math.abs(num);
+            }
+        }
     },
     data() {
         return {
@@ -68,7 +82,7 @@ export default {
                     caption: "Current price",
                 },
                 {
-                    value: this.toInterNationalNumber(this.token?.market_cap),
+                    value: this.nFormatter(this.token?.market_cap),
                     caption: "Market cap",
                 },
                 {
@@ -76,7 +90,7 @@ export default {
                     caption: "Market rank",
                 },
                 {
-                    value: this.toInterNationalNumber(this.token?.circulating_supply),
+                    value: this.nFormatter(this.token?.circulating_supply),
                     caption: "Circulating Supply",
                 },
                 {
@@ -130,20 +144,17 @@ export default {
                 {
                     value: `${this.roundData(this.token?.social_mentions_change)}%`,
                     caption: "24H Social mentions %",
-                    type: "number",
-                    suffix: "%"
+                    compare: this.token.social_mentions_change > 0,
                 },
                 {
                     value: `${this.roundData(this.token?.social_engagement_change)}%`,
                     caption: "24H Social engamgents %",
-                    type: "number",
-                    suffix: "%"
+                    compare: this.token?.social_engagement_change > 0,
                 },
                 {
                     value: `${this.roundData(this.token?.average_sentiment)}%`,
                     caption: "24H Social sentiments %",
-                    type: "number",
-                    suffix: "%"
+                    compare: this.token?.average_sentiment > 0,
                 },
                 {
                     value: "-",
@@ -166,15 +177,15 @@ export default {
                     caption: "Website",
                 },
                 {
-                    value: this.kFormatter(this.token?.twitter_followers) ?? "-",
+                    value: this.nFormatter(this.token?.twitter_followers) ?? "-",
                     caption: "Twitter Followers",
                 },
                 {
-                    value: this.kFormatter(this.token?.telegram_members) ?? "-",
+                    value: this.nFormatter(this.token?.telegram_members) ?? "-",
                     caption: "TG Followers",
                 },
                 {
-                    value: this.kFormatter(this.token?.whitepaper_followers??0) ,
+                    value: this.nFormatter(this.token?.whitepaper_followers??0) ,
                     caption: "White papaer",
                 },
             ],
