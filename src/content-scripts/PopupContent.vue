@@ -250,7 +250,7 @@
                                 </b-row>
                                 <b-row class="mt-1">
                                     <b-col class="mt-1 mb-2" style="height: 1px; background-color: grey;"></b-col>
-                                    <MarketDataTable :token=coindata.symbol />
+                                    <MarketDataTable :token="coindata" />
                                 </b-row>
                             </b-card-body>
                         </b-card>

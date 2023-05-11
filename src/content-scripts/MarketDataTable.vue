@@ -39,119 +39,142 @@ export default {
     props: {
         token: Object,
     },
+    methods:{
+        toInterNationalNumber(val) {
+            if (val)
+                return new Intl.NumberFormat('en-US', {
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 15,
+                }).format(val);
+        },
+        roundData(val) {
+            if (val) {
+                return this.toInterNationalNumber(parseFloat(val).toFixed(2));
+            }
+        },
+        kFormatter(num) {
+            return Math.abs(num) > 999 ? Math.sign(num) * ((Math.abs(num) / 1000).toFixed(1)) + 'k' : Math.sign(num) * Math.abs(num)
+        },
+    },
     data() {
         return {
             tempData: [
                 {
-                    value: "3.23",
+                    value: "-",
                     caption: "Date created",
                 },
                 {
-                    value: "0.005$",
+                    value: `${this.roundData(this.token?.current_price)}$`,
                     caption: "Current price",
                 },
                 {
-                    value: "2.5M",
+                    value: this.toInterNationalNumber(this.token?.market_cap),
                     caption: "Market cap",
                 },
                 {
-                    value: "568#",
+                    value: `${this.token?.market_cap_rank}#`,
                     caption: "Market rank",
                 },
                 {
-                    value: "329M",
+                    value: this.toInterNationalNumber(this.token?.circulating_supply),
                     caption: "Circulating Supply",
                 },
                 {
-                    value: "3.5%",
+                    value: `-`,
                     caption: "% in circulation",
                 },
                 {
-                    value: "1.1M$",
+                    value: "-",
                     caption: "Daily Volume",
                 },
                 {
-                    value: "10%",
+                    value: "-",
                     caption: "Daily Volume Change %",
                 },
                 {
-                    value: "0.015$",
+                    value: this.token?.ATH ?? "-",
                     caption: "All time high",
                 },
                 {
-                    value: "60%",
+                    value: "-",
                     caption: "% from ATH 60%",
                 },
                 {
-                    value: "0.014",
+                    value: "-",
                     caption: "All time low",
                 },
                 {
-                    value: "60%",
+                    value: "-",
                     caption: "% from ATL 60%",
                 },
                 {
-                    value: "500%",
+                    value: "-",
                     caption: "INFLATION",
                 },
                 {
-                    value: "10k",
+                    value: "-",
                     caption: "Holders",
                 },
                 {
-                    value: "10%",
+                    value: "-",
                     caption: "Holders 24h % change",
                 },
                 {
-                    value: "15%",
+                    value: "-",
                     caption: "Holders 7 day % change",
                 },
                 {
-                    value: "-",
+                    value: this.token?.next_unlock_date ?? "-",
                     caption: "Next unlock date",
                 },
                 {
-                    value: "-",
+                    value: `${this.roundData(this.token?.social_mentions_change)}%`,
                     caption: "24H Social mentions %",
+                    type: "number",
+                    suffix: "%"
                 },
                 {
-                    value: "-",
+                    value: `${this.roundData(this.token?.social_engagement_change)}%`,
                     caption: "24H Social engamgents %",
+                    type: "number",
+                    suffix: "%"
+                },
+                {
+                    value: `${this.roundData(this.token?.average_sentiment)}%`,
+                    caption: "24H Social sentiments %",
+                    type: "number",
+                    suffix: "%"
                 },
                 {
                     value: "-",
-                    caption: "24H Social sentiments %",
-                },
-                {
-                    value: "10x",
                     caption: "Xs from Public price",
                 },
                 {
-                    value: "0.04",
+                    value: "-",
                     caption: "Public price",
                 },
                 {
-                    value: "130x to GALA",
+                    value: "-",
                     caption: "x to  no 1 in category",
                 },
                 {
-                    value: "15%",
+                    value: "-",
                     caption: "Market cap/daily volume %",
                 },
                 {
-                    value: "-",
+                    value: this.token?.Website ?? "-",
                     caption: "Website",
                 },
                 {
-                    value: "13k",
+                    value: this.kFormatter(this.token?.twitter_followers) ?? "-",
                     caption: "Twitter Followers",
                 },
                 {
-                    value: "20K",
+                    value: this.kFormatter(this.token?.telegram_members) ?? "-",
                     caption: "TG Followers",
                 },
                 {
-                    value: "-",
+                    value: this.kFormatter(this.token?.whitepaper_followers??0) ,
                     caption: "White papaer",
                 },
             ],
