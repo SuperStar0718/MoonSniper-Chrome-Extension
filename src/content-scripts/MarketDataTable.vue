@@ -3,10 +3,12 @@
       <b-row class="w-100 m-auto">
         <b-col v-for="(item, index) in tempData" :key="index" cols="6" md="3" class="border-col">
           <h3 class="text-center font-weight-bold market-value" :class="{ 'text-success': (item.compare===true), 'text-danger': (item.compare===false) }">
-            {{ item.value }}
+            <span v-if="item.compare !== 'icon'">{{ item.value }}</span> <!-- Render item.value if item.compare is not equal to 'icon' -->
+            <b-img rounded v-else-if="item.compare === 'icon'" :src="item.imageSrc" class="w-50 mx-auto" alt="Icon" fluid style="max-width: 50px;"/> <!-- Render the image if item.compare is equal to 'icon' -->
           </h3>
           <h6 class="text-center market-caption">
-            {{ item.caption }}
+            <span v-if="item.compare !== 'icon'">{{ item.caption }}</span> 
+            <span v-if="(item.compare === 'icon' && item.value != 0)">{{ item.value }}</span> 
           </h6>
         </b-col>
       </b-row>
@@ -35,12 +37,14 @@
 </style>
 
 <script>
-import { BRow, BCol } from "bootstrap-vue-3";
+import { BRow, BCol, BImg } from "bootstrap-vue-3";
+import BASE_URL_i from '../../base_url.js'
 
 export default {
     components: {
         BRow,
         BCol,
+        BImg,
     },
     props: {
         token: Object,
@@ -173,20 +177,28 @@ export default {
                     caption: "Market cap/daily volume %",
                 },
                 {
-                    value: this.token?.Website ?? "-",
+                    value: this.nFormatter(this.token?.Website ?? 0),
                     caption: "Website",
+                    compare: "icon",
+                    imageSrc: `${BASE_URL_i}images/static/website.png`
                 },
                 {
                     value: this.nFormatter(this.token?.twitter_followers) ?? "-",
                     caption: "Twitter Followers",
+                    compare: "icon",
+                    imageSrc: `${BASE_URL_i}images/static/twitter.png`
                 },
                 {
                     value: this.nFormatter(this.token?.telegram_members) ?? "-",
                     caption: "TG Followers",
+                    compare: "icon",
+                    imageSrc: `${BASE_URL_i}images/static/telegram.png`
                 },
                 {
                     value: this.nFormatter(this.token?.whitepaper_followers??0) ,
                     caption: "White papaer",
+                    compare: "icon",
+                    imageSrc: `${BASE_URL_i}images/static/whitepaper.png`
                 },
             ],
         };
