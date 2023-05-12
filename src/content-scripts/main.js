@@ -64,32 +64,58 @@ if (domain.includes("coingecko.com")) {
   }
 }
 } else if (domain.includes("coinmarketcap.com")) {
-  var thHtml = document.createElement("th");
-  thHtml.classList = "table-th-moon stickyTop";
-  thHtml.innerHTML = "Moon"
-  document.querySelector('.cmc-body-wrapper table thead tr').prepend(thHtml.cloneNode(true));
 
+  // Function to add moon logo to elements
+  function addMoonLogoToElement(element) {
+    let symbol;
+    if (element.querySelector('.coin-item-symbol') != null) {
+      symbol = element.querySelector('.coin-item-symbol').innerHTML.trim();
+    } else {
+      symbol = element.querySelector('.crypto-symbol').innerHTML.trim();
+    }
 
-  featureBoxRight = document.querySelectorAll('.cmc-body-wrapper table tbody tr');
-  if (featureBoxRight) {
-    for (let i = 0; i < featureBoxRight.length; i++) {
-      let symbol;
-      if (featureBoxRight[i].querySelector('.coin-item-symbol') != null) {
-        symbol = featureBoxRight[i].querySelector('.coin-item-symbol').innerHTML.trim();
-      } else {
-        symbol = featureBoxRight[i].querySelector('.crypto-symbol').innerHTML.trim();
+    const option = document.createElement('td');
+    option.innerHTML = '<span ><img style="width:40px; cursor: pointer;" class="moon-logo ' + symbol + '" src="'+BASE_URL+'images/moon/icon/fullcolor.png"></span>';
+    option.setAttribute("style", "width: 53px; padding-left:0; padding-right:0");
+
+    element.prepend(option);
+    const specificMoon = element.querySelector('span');
+
+    specificMoon.addEventListener('click', triggerPopup, false);
+    if (symbol)
+      specificMoon.symbol = symbol;
+  }
+
+  // Callback function for MutationObserver
+  function handleMutations(mutationsList, observer) {
+    for (let mutation of mutationsList) {
+      if (mutation.type === 'childList') {
+        for (let node of mutation.addedNodes) {
+          // Check if added node is a table row
+          if (node.nodeName === 'TR') {
+            // Add moon logo to new row
+            addMoonLogoToElement(node);
+          }
+        }
       }
-      option.innerHTML = '<span ><img style="width:40px; cursor: pointer;" class="moon-logo ' + symbol + '" src="'+BASE_URL+'images/moon/icon/fullcolor.png"></span>';
-      option.setAttribute("style", "width: 53px; padding-left:0; padding-right:0")
-      featureBoxRight[i].prepend(option.cloneNode(true));
-      //Add data of symbol
-      var specificMoon = featureBoxRight[i].getElementsByTagName("span")[0];
-
-      specificMoon.addEventListener('click', triggerPopup, false);
-      if (symbol)
-        specificMoon.symbol = symbol;
     }
   }
+
+  // Find target node to observe
+  const targetNode = document.querySelector('.cmc-body-wrapper table tbody');
+
+  // Create new MutationObserver
+  const observer = new MutationObserver(handleMutations);
+
+  // Define configuration for MutationObserver
+  const config = { childList: true };
+
+  // Start observing target node
+  observer.observe(targetNode, config);
+
+  // Add moon logo to existing rows
+  const existingRows = document.querySelectorAll('.cmc-body-wrapper table tbody tr');
+  existingRows.forEach(addMoonLogoToElement);
 
 } else if (domain.includes("dexscreener.com")) {
   featureBoxRight = document.querySelectorAll('.custom-j3hajj a.chakra-link.custom-1oo4dn7');
