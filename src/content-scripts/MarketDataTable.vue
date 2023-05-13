@@ -59,7 +59,7 @@ export default {
         },
         roundData(val) {
             if (val) {
-                return this.toInterNationalNumber(parseFloat(val).toFixed(0));
+                return this.toInterNationalNumber(parseFloat(val).toFixed(2));
             }
         },
         nFormatter(num) {
@@ -110,7 +110,7 @@ export default {
                     caption: "Daily Volume Change %",
                 },
                 {
-                    value: this.token?.ATH ?? "-",
+                    value: this.roundData(this.token?.ath ?? 0),
                     caption: "All time high",
                 },
                 {
@@ -118,7 +118,7 @@ export default {
                     caption: "% from ATH 60%",
                 },
                 {
-                    value: "-",
+                    value: this.roundData(this.token?.atl ?? 0),
                     caption: "All time low",
                 },
                 {
