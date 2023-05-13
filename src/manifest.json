@@ -15,7 +15,7 @@
     "host_permissions": [
         "*://*/*"
     ],"web_accessible_resources": [{
-    "resources": ["popup/loading.gif"],
+    "resources": ["popup/loading.gif", "assets/image/lazard.png"],
     "matches": ["<all_urls>"]
     }],
     "icons": {

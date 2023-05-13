@@ -23,13 +23,15 @@ var option = document.createElement("td");
 option.classList = "table-td-moon"
 var domain = window.location.href;
 let featureBoxRight = [];
+var lazard = chrome.runtime.getURL("assets/image/lazard.png");
+
 if (domain.includes("coingecko.com")) {
   if(domain.includes("coingecko.com/en/coins"))
   {
     featureBoxRight = document.querySelectorAll('[data-controller="coins-information"]');
     let el1 = featureBoxRight[0].querySelectorAll('div div div:nth-child(2)')[0];
     let el2 = featureBoxRight[0].querySelectorAll('div div div:nth-child(2)')[0];
-    option.innerHTML = '<span ><img style="width:40px; cursor: pointer;" class="moon-logo" src="'+BASE_URL+'images/moon/icon/fullcolor.png"></span>';
+    option.innerHTML = '<span ><img style="width:40px; cursor: pointer;" class="moon-logo" src="'+lazard+'"></span>';
     option.setAttribute("style", "width: 53px; ")
     el2.prepend(option.cloneNode(true));
     let ab = el1.innerHTML.trim();
@@ -50,7 +52,7 @@ if (domain.includes("coingecko.com")) {
 
       var symbol = featureBoxRight[i].querySelectorAll('a span')[1].innerHTML.trim();
 
-      option.innerHTML = '<span ><img style="width:40px; cursor: pointer;" class="moon-logo" src="'+BASE_URL+'images/moon/icon/fullcolor.png"></span>';
+      option.innerHTML = '<span ><img style="width:40px; cursor: pointer;" class="moon-logo" src="'+lazard+'"></span>';
       option.setAttribute("style", "width: 53px; ")
 
       featureBoxRight[i].prepend(option.cloneNode(true));
@@ -75,7 +77,7 @@ if (domain.includes("coingecko.com")) {
     }
 
     const option = document.createElement('td');
-    option.innerHTML = '<span ><img style="width:40px; cursor: pointer;" class="moon-logo ' + symbol + '" src="'+BASE_URL+'images/moon/icon/fullcolor.png"></span>';
+    option.innerHTML = '<span ><img style="width:40px; cursor: pointer;" class="moon-logo ' + symbol + '" src="'+lazard+'"></span>';
     option.setAttribute("style", "width: 53px; padding-left:0; padding-right:0");
 
     element.prepend(option);
@@ -126,7 +128,7 @@ if (domain.includes("coingecko.com")) {
       var dexSpan = document.createElement("span");
       dexSpan.classList = "table-td-moon chakra-badge custom-1hloedr"
       var symbol = featureBoxRight[i].querySelector('span.chakra-text.custom-q28k12').innerHTML.trim();
-      dexSpan.innerHTML = '<span ><img style="width:40px; cursor: pointer;" class="moon-logo" src="'+BASE_URL+'images/moon/icon/fullcolor.png"></span>';
+      dexSpan.innerHTML = '<span ><img style="width:40px; cursor: pointer;" class="moon-logo" src="'+lazard+'"></span>';
       dexSpan.setAttribute("style", "width: 53px; padding-left:0; padding-right:0")
       featureBoxRight[i].firstChild.prepend(dexSpan.cloneNode(true));
       var specificMoon = featureBoxRight[i].getElementsByTagName("span")[0];
@@ -143,7 +145,7 @@ if (domain.includes("coingecko.com")) {
       for (let i = 0; i < featureBoxRight.length; i++) {
         let symbol;
 
-        option.innerHTML = '<span ><img style=" width:25px; cursor: pointer;" class="moon-logo ' + symbol + '" src="'+BASE_URL+'images/moon/icon/fullcolor.png"></span>';
+        option.innerHTML = '<span ><img style=" width:25px; cursor: pointer;" class="moon-logo ' + symbol + '" src="'+lazard+'"></span>';
         option.setAttribute("style", "width: 25px; padding-left:0; padding-right:0; margin-right: 6px;")
         featureBoxRight[i].firstChild.prepend(option.cloneNode(true));
         var specificMoon = featureBoxRight[i].getElementsByTagName("span")[0];
@@ -159,7 +161,7 @@ if (domain.includes("coingecko.com")) {
     if (featureBoxRight) {
       for (let i = 0; i < featureBoxRight.length; i++) {
         let symbol;
-        option.innerHTML = '<span ><img style=" width:25px; cursor: pointer;" class="moon-logo ' + symbol + '" src="'+BASE_URL+'images/moon/icon/fullcolor.png"></span>';
+        option.innerHTML = '<span ><img style=" width:25px; cursor: pointer;" class="moon-logo ' + symbol + '" src="'+lazard+'"></span>';
         option.setAttribute("style", "width: 25px; padding-left:0; padding-right:0; margin-right: 6px;")
         featureBoxRight[i].firstChild.firstChild.firstChild.prepend(option.cloneNode(true));
         var specificMoon = featureBoxRight[i].getElementsByTagName("span")[0];
@@ -174,7 +176,7 @@ var moonDiv = document.createElement("div");
 moonDiv.classList = "open-moon-sniper-app"
 let DivBox = document.querySelectorAll('[class="tw-flex tw-justify-end tw-items-center"]');
 let element1 = DivBox[0].querySelectorAll('div')[0];
-moonDiv.innerHTML = '<span id="openSite"><img style="width:40px; cursor: pointer;" class="moon-logo" src="'+BASE_URL+'images/moon/icon/fullcolor.png"></span>';
+moonDiv.innerHTML = '<span id="openSite"><img style="width:40px; cursor: pointer;" class="moon-logo" src="'+lazard+'"></span>';
 moonDiv.setAttribute("style", "width: 53px; display: none")
 element1.prepend(moonDiv.cloneNode(true));
 var specificMoonDiv = element1.getElementsByTagName("span")[0];
