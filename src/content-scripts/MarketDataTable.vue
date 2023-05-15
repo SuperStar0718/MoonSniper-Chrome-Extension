@@ -98,11 +98,11 @@ export default {
                     caption: "Circulating Supply",
                 },
                 {
-                    value: `-`,
+                    value: this.token?.total_supply_percent ?? `-` + '%',
                     caption: "% in circulation",
                 },
                 {
-                    value: "-",
+                    value: this.nFormatter(this.token?.total_volume ?? 0),
                     caption: "Daily Volume",
                 },
                 {
@@ -110,20 +110,22 @@ export default {
                     caption: "Daily Volume Change %",
                 },
                 {
-                    value: this.roundData(this.token?.ath ?? 0),
+                    value: `$${this.roundData(this.token?.ath ?? 0)}`,
                     caption: "All time high",
                 },
                 {
-                    value: "-",
+                    value: `${this.roundData(this.token?.ath_change_percentage ?? 0)}%`,
                     caption: "% from ATH 60%",
+                    compare: this.token?.ath_change_percentage > 0,
                 },
                 {
-                    value: this.roundData(this.token?.atl ?? 0),
+                    value: `$${this.roundData(this.token?.atl ?? 0)}`,
                     caption: "All time low",
                 },
                 {
-                    value: "-",
+                    value: `${this.roundData(this.token?.atl_change_percentage ?? 0)}%`,
                     caption: "% from ATL 60%",
+                    compare: this.token?.atl_change_percentage > 0,
                 },
                 {
                     value: "-",
