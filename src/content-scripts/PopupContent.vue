@@ -53,7 +53,7 @@
                                     <span class=""
                                         :class="{'greenFlash':coindata.flash == 1,'redFlash':coindata.flash ==2,'whiteFlash':coindata.flash ==3}"
                                         style="font-family: 'Poppins-Light'; font-style: normal;font-weight: 400; font-size: 20px;"
-                                        v-if="coindata.current_price && coindata.current_price>= 0">${{ roundData(coindata.current_price) }}
+                                        v-if="coindata.current_price && coindata.current_price>= 0">${{ priceConversation(coindata.current_price) }}
                                     </span>
                                 </div>
                                 <div class="d-flex m-auto">
@@ -394,6 +394,8 @@
                 coindata: [],
                 dataloaded: false,
                 BASE_URL:BASE_URL_i,
+                coinsStr:'',
+                livePriceInterval:null,
                 supplyChart: {
                     series: [],
 
@@ -943,6 +945,7 @@
                             this.loadTradeHystory();
                            
                             this.dataloaded = true;
+                            this.fetchLiveCoinPrice();
                         }
 
                     })
@@ -1168,6 +1171,25 @@
                 if (val) {
                     return parseFloat(val).toFixed(len);
                 }
+            },
+            priceConversation(val) {
+                let nval = 0.00;
+                if (parseFloat(val) > 100) {
+                    nval = parseFloat(val).toFixed(2);
+                } else if (parseFloat(val) > 1.1 && parseFloat(val) <= 100) {
+                    nval = parseFloat(val).toFixed(2);
+                } else if (parseFloat(val) > 0.5 && parseFloat(val) <= 1.1) {
+                    nval = parseFloat(val).toFixed(3);
+                } else if (parseFloat(val) > 0.05 && parseFloat(val) <= 0.5) {
+                    nval = parseFloat(val).toFixed(4);
+                } else {
+                    nval = val;
+                }
+                return new Intl.NumberFormat('en-US', {
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 15,
+                }).format(nval);
+
             },
             xfromlunch(val, val2) {
                 if (val2 == 'roi_times') {
@@ -1403,6 +1425,56 @@
                 } else {
                     return false;
                 }
+            },
+              fetchLiveCoinPrice() {
+                if (this.livePriceInterval) {
+                    clearInterval(this.livePriceInterval)
+                }
+                const body = document.querySelector('body');
+                if (body && body.hasAttribute('app_coingecko_installed_true')) {
+                    this.livePriceInterval = setInterval(() => {
+                        if (!document.hidden) {
+                            this.callLivePrice();
+                        }
+                    }, 5000);
+                } else {
+                    // this.liveCoinFetch();
+                }
+            },
+            callLivePrice() {
+                let coinids = [];
+                this.coinsStr = '';
+                this.coinsStr = this.coindata.coin_id + ','+Math.random();
+
+                fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${this.coinsStr}&vs_currencies=USD`, {
+                        method: 'GET',
+                    })
+                    .then(response => response.json())
+                    .then(response => {
+
+                        let oldVal = this.coindata.current_price;
+                        this.coindata.current_price = response[this.coindata.coin_id].usd;
+
+                        if (oldVal < response[this.coindata.coin_id].usd) {
+                            this.coindata.flash = 1;
+                            setTimeout(() => {
+                                if (this.coindata.coin_id) {
+                                    this.coindata.flash = 3;
+
+                                }
+                            }, 1000);
+
+                        } else {
+                            this.coindata.flash = 3;
+
+                            setTimeout(() => {
+                                if (this.coindata.coin_id) {
+                                    this.coindata.flash = 3;
+
+                                }
+                            }, 1000);
+                        }
+                    });
             },
             calculate_social_score() {
                 let rowdata = this.coindata;
@@ -1937,5 +2009,29 @@
         font-family: "Poppins-Light" !important;
         src: local("Poppins-Light"),
             url(../fonts/Poppins-Light.ttf) format("truetype");
+    }
+    .greenFlash {
+        color: #6BD863 !important;
+
+    }
+
+    .redFlash {
+        color: #ea5455 !important;
+
+    }
+
+    .whiteFlash {
+        color: #ffffff !important;
+
+    }
+
+    .greenFlash1 {
+        color: #6BD863;
+
+    }
+
+    .redFlash1 {
+        color: #ea5455;
+
     }
 </style>
