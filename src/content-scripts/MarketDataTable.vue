@@ -4,8 +4,10 @@
         <b-col v-for="(item, index) in tempData" :key="index" cols="6" md="3" class="border-col">
           <h3 class="text-center font-weight-bold market-value" :class="{ 'text-success': (item.compare===true), 'text-danger': (item.compare===false) }">
             <span v-if="item.compare !== 'icon'">{{ item.value }}</span> <!-- Render item.value if item.compare is not equal to 'icon' -->
-            <b-img rounded v-else-if="item.compare === 'icon'" :src="item.imageSrc" class="w-50 mx-auto" alt="Icon" fluid style="max-width: 50px;"/> <!-- Render the image if item.compare is equal to 'icon' -->
-          </h3>
+            <a v-else-if="item.compare === 'icon'" :href="item.url" target="_blank" class="d-block">
+                <b-img rounded :src="item.imageSrc" class="w-50 mx-auto" alt="Icon" fluid style="max-width: 50px;"/> 
+            </a>          
+        </h3>
           <h6 class="text-center market-caption">
             <span v-if="item.compare !== 'icon'">{{ item.caption }}</span> 
             <span v-if="(item.compare === 'icon' && item.value != 0)">{{ item.value }}</span> 
@@ -144,7 +146,7 @@ export default {
                     caption: "Holders 7 day % change",
                 },
                 {
-                    value: this.token?.next_unlock_date ?? "-",
+                    value: this.token?.next_unlock_date_text ?? "-",
                     caption: "Next unlock date",
                 },
                 {
@@ -182,25 +184,29 @@ export default {
                     value: this.nFormatter(this.token?.Website ?? 0),
                     caption: "Website",
                     compare: "icon",
-                    imageSrc: `${BASE_URL_i}images/static/website.png`
+                    imageSrc: `${BASE_URL_i}images/static/website.png`,
+                    url: this.token.Website ?? '#'
                 },
                 {
                     value: this.nFormatter(this.token?.twitter_followers) ?? "-",
                     caption: "Twitter Followers",
                     compare: "icon",
-                    imageSrc: `${BASE_URL_i}images/static/twitter.png`
+                    imageSrc: `${BASE_URL_i}images/static/twitter.png`,
+                    url: this.token.twitter
                 },
                 {
                     value: this.nFormatter(this.token?.telegram_members) ?? "-",
                     caption: "TG Followers",
                     compare: "icon",
-                    imageSrc: `${BASE_URL_i}images/static/telegram.png`
+                    imageSrc: `${BASE_URL_i}images/static/telegram.png`,
+                    url: this.token.telegram
                 },
                 {
                     value: this.nFormatter(this.token?.whitepaper_followers??0) ,
                     caption: "White papaer",
                     compare: "icon",
-                    imageSrc: `${BASE_URL_i}images/static/whitepaper.png`
+                    imageSrc: `${BASE_URL_i}images/static/whitepaper.png`,
+                    url: this.token.whitepaper
                 },
             ],
         };
