@@ -26,6 +26,8 @@ let featureBoxRight = [];
 var lazard = chrome.runtime.getURL("assets/image/lazard.png");
 
 if (domain.includes("coingecko.com")) {
+  document.body.setAttribute('app_coingecko_installed_true', 'true');
+
   if(domain.includes("coingecko.com/en/coins"))
   {
     featureBoxRight = document.querySelectorAll('[data-controller="coins-information"]');
