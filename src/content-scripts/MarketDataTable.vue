@@ -74,7 +74,22 @@ export default {
             } else {
                 return Math.sign(num)*Math.abs(num);
             }
-        }
+        },
+        xfromlunch(val, val2) {
+            if (val2 == 'roi_times') {
+
+                return new Intl.NumberFormat('en-US', {
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 15,
+                }).format(val.toFixed(2));
+            } else {
+                var calculated_roi_x = val / val2;
+                return new Intl.NumberFormat('en-US', {
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 15,
+                }).format(calculated_roi_x.toFixed(2));
+            }
+        },
     },
     data() {
         return {
@@ -130,7 +145,7 @@ export default {
                     compare: this.token?.atl_change_percentage > 0,
                 },
                 {
-                    value: "-",
+                    value: this.token?.inflation ?? "-",
                     caption: "INFLATION",
                 },
                 {
@@ -165,7 +180,7 @@ export default {
                     compare: this.token?.average_sentiment > 0,
                 },
                 {
-                    value: "-",
+                    value: `${this.xfromlunch(this.token?.roi_times??0,'roi_times')}X`,
                     caption: "Xs from Public price",
                 },
                 {
