@@ -147,6 +147,7 @@ export default {
                 {
                     value: `${this.token?.inflation}%`,
                     caption: "INFLATION",
+                    compare: this.token?.inflatio > 0,
                 },
                 {
                     value: "-",
