@@ -5,12 +5,13 @@
           <h3 class="text-center font-weight-bold market-value" :class="{ 'text-success': (item.compare===true), 'text-danger': (item.compare===false) }">
             <span v-if="item.compare !== 'icon'">{{ item.value }}</span> <!-- Render item.value if item.compare is not equal to 'icon' -->
             <a v-else-if="item.compare === 'icon'" :href="item.url" target="_blank" class="d-block">
-                <b-img rounded :src="item.imageSrc" class="w-50 mx-auto" alt="Icon" fluid style="max-width: 50px;"/> 
+                <b-img rounded :src="item.imageSrc" class="w-50 mx-auto hover-image" alt="Icon" fluid style="max-width: 50px;"/> 
             </a>          
         </h3>
           <h6 class="text-center market-caption">
             <span v-if="item.compare !== 'icon'">{{ item.caption }}</span> 
-            <span v-if="(item.compare === 'icon' && item.value != 0)">{{ item.value }}</span> 
+            <span v-if="(item.compare === 'icon' && item.value != 0)">{{ item.value }}</span>
+            <span v-if="(item.compare === 'icon' && item.value == 0)">{{ item.text }}</span> 
           </h6>
         </b-col>
       </b-row>
@@ -35,6 +36,9 @@
 }
 .text-danger{
     color: rgb(220 38 38);
+}
+.hover-image:hover{
+    filter: brightness(0.8);
 }
 </style>
 
@@ -200,29 +204,33 @@ export default {
                     value: this.nFormatter(this.token?.Website ?? 0),
                     caption: "Website",
                     compare: "icon",
-                    imageSrc: `${BASE_URL_i}images/static/website.png`,
-                    url: this.token.Website ?? '#'
+                    imageSrc: chrome.runtime.getURL("assets/image/website.png"),
+                    url: this.token.Website ?? '#',
+                    text: "Website"
                 },
                 {
                     value: this.nFormatter(this.token?.twitter_followers) ?? "-",
                     caption: "Twitter Followers",
                     compare: "icon",
-                    imageSrc: `${BASE_URL_i}images/static/twitter.png`,
-                    url: this.token.twitter
+                    imageSrc: chrome.runtime.getURL("assets/image/twitter.png"),
+                    url: this.token.twitter ?? '#',
+                    text: "Twitter"
                 },
                 {
                     value: this.nFormatter(this.token?.telegram_members) ?? "-",
                     caption: "TG Followers",
                     compare: "icon",
-                    imageSrc: `${BASE_URL_i}images/static/telegram.png`,
-                    url: this.token.telegram
+                    imageSrc: chrome.runtime.getURL("assets/image/telegram.png"),
+                    url: this.token.telegram ?? '#',
+                    text: "Telegram"
                 },
                 {
                     value: this.nFormatter(this.token?.whitepaper_followers??0) ,
-                    caption: "White papaer",
+                    caption: "White papar",
                     compare: "icon",
                     imageSrc: `${BASE_URL_i}images/static/whitepaper.png`,
-                    url: this.token.whitepaper
+                    url: this.token.whitepaper ?? '#',
+                    text: "White paper"
                 },
             ],
         };
