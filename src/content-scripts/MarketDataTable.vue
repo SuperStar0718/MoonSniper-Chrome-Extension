@@ -145,7 +145,7 @@ export default {
                     compare: this.token?.atl_change_percentage > 0,
                 },
                 {
-                    value: this.token?.inflation ?? "-",
+                    value: `${this.token?.inflation}%`,
                     caption: "INFLATION",
                 },
                 {
