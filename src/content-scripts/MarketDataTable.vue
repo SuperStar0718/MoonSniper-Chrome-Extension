@@ -67,6 +67,7 @@ export default {
             if (val) {
                 return this.toInterNationalNumber(parseFloat(val).toFixed(2));
             }
+            return 0;
         },
         nFormatter(num) {
             if (Math.abs(num) > 999999999) {
@@ -99,7 +100,7 @@ export default {
         return {
             tempData: [
                 {
-                    value: "-",
+                    value: this.token?.public_date ?? "-",
                     caption: "Date created",
                 },
                 {
@@ -127,7 +128,7 @@ export default {
                     caption: "Daily Volume",
                 },
                 {
-                    value: "-",
+                    value: '-' ,
                     caption: "Daily Volume Change %",
                 },
                 {
@@ -189,7 +190,7 @@ export default {
                     caption: "Xs from Public price",
                 },
                 {
-                    value: "-",
+                    value: `${this.roundData(this.token?.public_price)}$`,
                     caption: "Public price",
                 },
                 {
@@ -197,7 +198,7 @@ export default {
                     caption: "x to  no 1 in category",
                 },
                 {
-                    value: "-",
+                    value: `${this.roundData(this.token?.market_cap / this.token?.total_volume)}%`,
                     caption: "Market cap/daily volume %",
                 },
                 {
