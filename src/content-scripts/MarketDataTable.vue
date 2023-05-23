@@ -182,7 +182,7 @@ export default {
                     caption: "Circulating Supply",
                 },
                 {
-                    value: `${this.token?.total_supply_percent}%` ?? `-`,
+                    value: `${this.token?.total_supply_percent}%` ?? "",
                     caption: "% in circulation",
                 },
                 {
@@ -218,19 +218,19 @@ export default {
                     compare: this.token?.inflation >= 0,
                 },
                 {
-                    value: "-",
+                    value: "",
                     caption: "Holders",
                 },
                 {
-                    value: "-",
+                    value: "",
                     caption: "Holders 24h % change",
                 },
                 {
-                    value: "-",
+                    value: "",
                     caption: "Holders 7 day % change",
                 },
                 {
-                    value: this.token?.next_unlock_date_text ?? "-",
+                    value: this.token?.next_unlock_date_text ?? "",
                     caption: "Next unlock date",
                 },
                 {
@@ -257,7 +257,7 @@ export default {
                     caption: "Public price",
                 },
                 {
-                    value: "-",
+                    value: "",
                     caption: "x to  no 1 in category",
                 },
                 {
@@ -273,7 +273,7 @@ export default {
                     text: "Website"
                 },
                 {
-                    value: this.nFormatter(this.token?.twitter_followers) ?? "-",
+                    value: this.nFormatter(this.token?.twitter_followers) ?? "",
                     caption: "Twitter Followers",
                     compare: "icon",
                     imageSrc: chrome.runtime.getURL("assets/image/twitter.png"),
@@ -281,7 +281,7 @@ export default {
                     text: "Twitter"
                 },
                 {
-                    value: this.nFormatter(this.token?.telegram_members) ?? "-",
+                    value: this.nFormatter(this.token?.telegram_members) ?? "",
                     caption: "TG Followers",
                     compare: "icon",
                     imageSrc: chrome.runtime.getURL("assets/image/telegram.png"),
