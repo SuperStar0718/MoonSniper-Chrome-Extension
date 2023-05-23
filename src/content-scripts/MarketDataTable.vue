@@ -279,7 +279,7 @@ export default {
                     value: this.nFormatter(this.token?.whitepaper_followers??0) ,
                     caption: "White papar",
                     compare: "icon",
-                    imageSrc: `${BASE_URL_i}images/static/whitepaper.png`,
+                    imageSrc: chrome.runtime.getURL("assets/image/whitepaper.png"),
                     url: this.token.whitepaper ?? '#',
                     text: "White paper"
                 },

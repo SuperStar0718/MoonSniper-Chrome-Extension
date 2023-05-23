@@ -20,7 +20,8 @@
         "assets/image/lazard.png",
         "assets/image/website.png",
         "assets/image/twitter.png",
-        "assets/image/telegram.png"
+        "assets/image/telegram.png",
+        "assets/image/whitepaper.png"
     ],
     "matches": ["<all_urls>"]
     }],
