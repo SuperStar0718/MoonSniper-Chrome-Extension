@@ -144,12 +144,25 @@ export default {
             }
 
         },
+        getYearMonth(val){
+            if(val){
+                const date = new Date(val);
+                const year = date.getFullYear();
+                const month = date.toLocaleString('default', { month: 'long' });
+
+                const formattedDate = year + ' ' + month;
+
+                return formattedDate
+            }
+
+            return ""
+        }
     },
     data() {
         return {
             tempData: [
                 {
-                    value: this.token?.public_date ?? "-",
+                    value: this.getYearMonth(this.token?.public_date),
                     caption: "Date created",
                 },
                 {
