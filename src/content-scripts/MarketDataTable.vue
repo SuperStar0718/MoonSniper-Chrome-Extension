@@ -1,18 +1,18 @@
 <template>
     <div>
       <b-row class="w-100 m-auto">
-        <b-col v-for="(item, index) in tempData" :key="index" cols="6" md="3" class="border-col">
-          <h3 class="text-center font-weight-bold market-value" :class="{ 'text-success': (item.compare===true), 'text-danger': (item.compare===false) }">
-            <span v-if="item.compare !== 'icon'">{{ item.value }}</span> <!-- Render item.value if item.compare is not equal to 'icon' -->
-            <a v-else-if="item.compare === 'icon'" :href="item.url" target="_blank" class="d-block">
-                <b-img rounded :src="item.imageSrc" class="w-50 mx-auto hover-image" alt="Icon" fluid style="max-width: 50px;"/> 
-            </a>          
-        </h3>
-          <h6 class="text-center market-caption">
-            <span v-if="item.compare !== 'icon'">{{ item.caption }}</span> 
-            <span v-if="(item.compare === 'icon' && item.value != 0)">{{ item.value }}</span>
-            <span v-if="(item.compare === 'icon' && item.value == 0)">{{ item.text }}</span> 
-          </h6>
+        <b-col  v-for="(item, index) in filteredData"  :key="index" cols="6" :md=" (index >= filteredData.length - 4 - filteredData.length % 4) && (index < filteredData.length - 4) ? 12/(filteredData.length % 4) : '3'"  class="border-col">
+            <h3 class="text-center font-weight-bold market-value" :class="{ 'text-success': (item.compare===true), 'text-danger': (item.compare===false) }">
+                <span v-if="item.compare !== 'icon'">{{ item.value }}</span> <!-- Render item.value if item.compare is not equal to 'icon' -->
+                <a v-else-if="item.compare === 'icon'" :href="item.url" target="_blank" class="d-block">
+                    <b-img rounded :src="item.imageSrc" class="w-50 mx-auto hover-image" alt="Icon" fluid style="max-width: 50px;"/> 
+                </a>          
+            </h3>
+            <h6 class="text-center market-caption">
+                <span v-if="item.compare !== 'icon'">{{ item.caption }}</span> 
+                <span v-if="(item.compare === 'icon' && item.value != 0)">{{ item.value }}</span>
+                <span v-if="(item.compare === 'icon' && item.value == 0)">{{ item.text }}</span> 
+            </h6>
         </b-col>
       </b-row>
     </div>
@@ -299,5 +299,11 @@ export default {
             ],
         };
     },
+    computed: {
+    filteredData() {
+      return this.tempData.filter((data) => data.value !== '');
+    },
+  },
 };
+
 </script>
