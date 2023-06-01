@@ -301,7 +301,7 @@ export default {
     },
     computed: {
     filteredData() {
-      return this.tempData.filter((data) => typeof data.value === 'number' || (typeof data.value === 'string' && !data.value.includes('null') && data.value!=='' && !data.value.includes('NaN')));
+      return this.tempData.filter((data) => typeof data.value === 'number' || (typeof data.value === 'string' && !data.value.includes('null') && data.value!=='' && !data.value.includes('NaN')));//this is the filter array to remove empty values.
     },
   },
 };
